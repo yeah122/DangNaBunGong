@@ -1,5 +1,13 @@
+/* 디자인에 관한 코드 */
 .logo-text {
-  font-size: 24px;
-  font-weight: bold;
   color: #f21111;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+/* 배치에 관한 코드 */
+.logo {
+  position: absolute;
+  left: 601px;
+  top: 64px;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../style/Login.css";
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -22,8 +23,9 @@ const Login = () => {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <div>
+        <div className="username">
           <input
+            className="input"
             name="id"
             value={userName}
             type="text"
@@ -31,8 +33,9 @@ const Login = () => {
             placeholder="아이디"
           />
         </div>
-        <div>
+        <div className="password ">
           <input
+            className="input"
             name="password"
             value={password}
             type="password"
@@ -40,17 +43,17 @@ const Login = () => {
             placeholder="비밀번호"
           />
         </div>
-        <input type="submit" value="로그인" />
+        <input className="login btn" type="submit" value="로그인" />
       </form>
 
-      <div>
+      <div className="search-info">
         <span>아이디 찾기</span>
+        <span> | </span>
         <span>비밀번호 찾기</span>
+        <span> | </span>
         <span>회원가입</span>
       </div>
-      <div>
-        <button>카카오 로그인</button>
-      </div>
+      <button className="social btn">카카오 로그인</button>
     </>
   );
 };
