@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../components/LoginForm";
 import SocialLogin from "../components/SocialLogin";
-import logoImgPath from "../img/logo.png";
 import "../style/Login.css";
 
-const Login = () => {
+const Login = ({ LogoImg }) => {
   return (
     <>
       <div className="logo">
         <span className="logo-text">당근나라</span>
-        <img src={logoImgPath} alt="당근나라번개공주" width={47} height={85} />
+        <img src={LogoImg} alt="당근나라번개공주" width={47} height={85} />
         <span className="logo-text">번개공주</span>
       </div>
       <LoginForm />
