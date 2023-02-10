@@ -5,6 +5,9 @@ import "../style/Login.css";
 import { Link } from "react-router-dom";
 
 const Login = ({ LogoImg }) => {
+  /*
+  로고 -> 로그인 폼 -> ㅇㅇ찾기 -> 소셜로그인
+  */
   return (
     <>
       <Link to={"/"}>
@@ -14,7 +17,9 @@ const Login = ({ LogoImg }) => {
           <span className="logo-text">번개공주</span>
         </div>
       </Link>
+
       <LoginForm />
+
       <div className="search-info">
         <Link to={"/searchID"}>
           <span>아이디 찾기</span>
@@ -28,6 +33,7 @@ const Login = ({ LogoImg }) => {
           <span>회원가입</span>
         </Link>
       </div>
+
       <SocialLogin />
     </>
   );

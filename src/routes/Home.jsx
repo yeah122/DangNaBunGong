@@ -1,3 +1,6 @@
+/*
+그냥 메인 페이지라고 생각해보고 만든 화면
+*/
 import React from "react";
 import { Link } from "react-router-dom";
 

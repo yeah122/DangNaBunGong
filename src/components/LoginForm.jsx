@@ -6,6 +6,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState("");
 
   const onChange = (event) => {
+    // id, password 각각의 입력값이 변경될 때 화면에 표시되는 값도 변경
     const {
       target: { name, value },
     } = event;
@@ -17,9 +18,13 @@ const LoginForm = () => {
   };
 
   const onSubmit = (event) => {
+    // 로그인
     event.preventDefault();
   };
 
+  /*
+  아이디 입력창 -> 비밀번호 입력창 -> 로그인 버튼
+  */
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -33,6 +38,7 @@ const LoginForm = () => {
             placeholder="아이디"
           />
         </div>
+
         <div className="password ">
           <input
             className="input"
@@ -43,6 +49,7 @@ const LoginForm = () => {
             placeholder="비밀번호"
           />
         </div>
+
         <input className="login btn" type="submit" value="로그인" />
       </form>
     </>

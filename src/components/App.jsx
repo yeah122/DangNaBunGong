@@ -7,10 +7,13 @@ import Home from "../routes/Home";
 import KakaoLogin from "../routes/KakaoLogin";
 
 function App() {
+  // firebase에서 로고 이미지를 불러오고 있는가
   const [loading, setLoading] = useState(true);
+  // firebase에서 불러온 로고 이미지 주소
   const [attachmentUrl, setAttachmentUrl] = useState("");
 
   const getLogoImg = async () => {
+    // firebase로부터 로고 이미지 주소를 불러옴
     const attachmentRef = ref(storageService, "logo.png");
     setAttachmentUrl(await getDownloadURL(ref(storageService, attachmentRef)));
     setLoading(false);
@@ -20,6 +23,7 @@ function App() {
     getLogoImg();
   }, []);
 
+  // 각 화면 경로를 설정
   return (
     <div className="App">
       {loading ? (
