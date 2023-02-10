@@ -34,6 +34,12 @@
   font-size: 14px;
 }
 
+.logo-text {
+  color: #f21111;
+  font-weight: 800;
+  font-size: 24px;
+}
+
 /* 배치에 관한 코드 */
 .username {
   position: absolute;
@@ -63,4 +69,10 @@
   position: absolute;
   left: 571px;
   top: 503px;
+}
+
+.logo {
+  position: absolute;
+  left: 601px;
+  top: 64px;
 }
