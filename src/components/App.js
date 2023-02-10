@@ -2,6 +2,9 @@ import { storageService } from "../firebase";
 import Login from "../routes/Login";
 import { ref, getDownloadURL } from "@firebase/storage";
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "../routes/Home";
+import KakaoLogin from "../routes/KakaoLogin";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -19,7 +22,22 @@ function App() {
 
   return (
     <div className="App">
-      {loading ? <></> : <Login LogoImg={attachmentUrl} />}
+      {loading ? (
+        <></>
+      ) : (
+        <>
+          <Router>
+            <Routes>
+              <Route
+                path="/loginDo"
+                element={<Login LogoImg={attachmentUrl} />}
+              ></Route>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/kakaoLogin" element={<KakaoLogin />}></Route>
+            </Routes>
+          </Router>
+        </>
+      )}
     </div>
   );
 }
