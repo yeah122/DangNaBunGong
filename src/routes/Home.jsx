@@ -3,14 +3,18 @@
 */
 import React from "react";
 import { Link } from "react-router-dom";
+import CategoryModal from "../components/CategoryModal";
 
 const Home = () => {
   return (
-    <div>
-      <Link to={"/loginDo"}>
-        <button>로그인</button>
-      </Link>
-    </div>
+    <>
+      <div>
+        <Link to={"/loginDo"}>
+          <button>로그인</button>
+        </Link>
+      </div>
+      <CategoryModal />
+    </>
   );
 };
 
