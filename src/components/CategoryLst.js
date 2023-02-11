@@ -3,6 +3,8 @@ export const categories = [
     id: 1,
     name: "남성패션의류",
     path: "male-fashion",
+    // 추후 하위 카테고리 추가
+    // 카테고리 순서, 경로는 임의로 설정한 값
   },
   {
     id: 2,

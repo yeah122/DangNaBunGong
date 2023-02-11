@@ -7,10 +7,10 @@ const CategoryModal = () => {
   const [select, setSelect] = useState(0);
   const [hover, setHover] = useState(false);
 
+  // 카테고리 버튼에 마우스 올림 & 마우스 내림
   const onMouseOver = () => {
     setHover(true);
   };
-
   const onMouseOut = () => {
     setHover(false);
     setSelect(0);
