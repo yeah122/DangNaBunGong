@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { categories } from "./CategoryLst";
 import "../style/Category.css";
+import Recent from "./Recent";
 
 const CategoryModal = () => {
   const [select, setSelect] = useState(0);
@@ -17,28 +18,31 @@ const CategoryModal = () => {
   };
 
   return (
-    <div
-      className="category-btn"
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
-    >
-      <button>카테고리</button>
-      {hover && (
-        <>
-          <div>
-            <ul>
-              {categories.map((item) => (
-                <Link to={`/${item.path}`}>
-                  <li key={item.id} onMouseOver={() => setSelect(item.id)}>
-                    {item.name}
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <div
+        className="category-btn"
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+      >
+        <button>카테고리</button>
+        {hover && (
+          <>
+            <div>
+              <ul>
+                {categories.map((item) => (
+                  <Link to={`/${item.path}`}>
+                    <li key={item.id} onMouseOver={() => setSelect(item.id)}>
+                      {item.name}
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          </>
+        )}
+      </div>
+      <Recent />
+    </>
   );
 };
 
