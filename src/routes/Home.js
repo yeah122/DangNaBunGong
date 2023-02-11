@@ -14,6 +14,7 @@ const Home = () => {
         </Link>
       </div>
       <CategoryModal />
+      Test
     </>
   );
 };
