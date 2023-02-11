@@ -12,9 +12,11 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {
-	
+
 	boolean existsById(String memberid);
-	
+	boolean existsByMembertel(String membertel);
+	boolean existsByMembermail(String membermail);
+
 	Optional<MemberEntity> findByMemberidAndMemberpw(String memberid, String memberpw);
 	
 	@Query(value = "select count(member_id) from member where member_id = :memberid and member_pw = :memberpw", nativeQuery=true)

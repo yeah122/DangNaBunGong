@@ -22,6 +22,16 @@ public class MemberService {
 		
 		return memberRepository.existsById(memberid);
 	}
+
+	public boolean memberTelcheck(String membertel) {
+
+		return memberRepository.existsByMembertel(membertel);
+	}
+
+	public boolean memberMailcheck(String membermail) {
+
+		return memberRepository.existsByMembermail(membermail);
+	}
 	
 	//로그인 확인
 	public Integer loginCheck(String memberid, String memberpw) {

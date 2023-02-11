@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Controller
 public class MemberController {
@@ -79,7 +80,6 @@ public class MemberController {
 		return "home";
 	}
 
-
 	//회원가입
 	@GetMapping("/memberJoin")
 	public String member(Model model, HttpSession session) {
@@ -89,11 +89,66 @@ public class MemberController {
 
 	@PostMapping("/memberJoinDo")
 	public @ResponseBody ResultVo memberJoinDo(MemberJoinDto memberJoinDto, Model model) {
-		boolean memberId;
-		System.out.println(memberJoinDto.toString());
+		boolean memberId, memberTel, memberMail, isTel, isMail;
+
+		//null값 확인
+		String null_id = memberJoinDto.getMemberid();
+		String null_pw = memberJoinDto.getMemberpw();
+		String null_name = memberJoinDto.getMembername();
+		String null_tel = memberJoinDto.getMembertel();
+		String null_mail = memberJoinDto.getMembermail();
+
+		if(null_id.isEmpty() || null_pw.isEmpty() || null_name.isEmpty() || null_mail.isEmpty() || null_tel.isEmpty()){
+			return new ResultVo(400, "false", "필수 입력 정보를 모두 입력해주십시오.");
+		}
+
+		//아이디 중복 확인
 		memberId = memberService.memberIDcheck(memberJoinDto.getMemberid());
-		
-		if (!memberId) { // memberid == false
+		if (memberId) { // memberid == true
+			System.out.println("이미 존재하는 아이디");
+			String message = "이미 존재하는 아이디입니다.";
+			model.addAttribute("message", message);
+			return new ResultVo(100, "false", "아이디 중복");
+		}
+
+		//전화번호 양식 확인
+		isTel = Pattern.matches("^\\d{2,3}\\d{3,4}\\d{4}$", memberJoinDto.getMembertel());
+		if (!isTel) { // isTel == true
+			System.out.println("유효하지 않은 형식의 전화번호");
+			String message = "유효한 전화번호를 입력해주십시오.";
+			model.addAttribute("message", message);
+			return new ResultVo(100, "false", "유효하지 않은 전화번호");
+		}
+
+		//전화번호 중복 확인
+		memberTel = memberService.memberTelcheck(memberJoinDto.getMembertel());
+		if (memberTel) { // memberTel == true
+			System.out.println("이미 존재하는 전화번호");
+			String message = "이미 사용 중인 전화번호입니다.";
+			model.addAttribute("message", message);
+			return new ResultVo(100, "false", "전화번호 중복");
+		}
+
+		//이메일 양식 확인"^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$"
+		isMail = Pattern.matches("^[a-zA-Z0-9]+\\@[a-zA-Z0-9.-]+\\.[a-zA-Z]+$", memberJoinDto.getMembermail());
+		if (!isMail) { // isMail == true
+			System.out.println("유효하지 않은 형식의 이메일");
+			String message = "유효한 이메일 입력해주십시오.";
+			model.addAttribute("message", message);
+			return new ResultVo(100, "false", "유효하지 않은 이메일");
+		}
+
+		//이메일 중복 확인
+		memberMail = memberService.memberMailcheck(memberJoinDto.getMembermail());
+		if (memberMail) { // memberMail == true
+			System.out.println("이미 존재하는 이메일");
+			String message = "이미 사용 중인 이메일입니다.";
+			model.addAttribute("message", message);
+			return new ResultVo(100, "false", "이메일 중복");
+		}
+
+		//회원가입 실행
+		else {
 			String findMember = memberService.memberWrite(memberJoinDto.toMemberEntity());
 			if(memberService.memberIDcheck(findMember)) { //회원 정보 삽입 후 확인
 				String message = "회원가입이 완료되었습니다.";
@@ -108,12 +163,6 @@ public class MemberController {
 				return new ResultVo(300, "false", "가입 실패");
 				//return "memberJoin";
 			}
-		} else {
-			System.out.println("이미 존재하는 아이디");
-			String message = "이미 존재하는 아이디입니다.";
-			model.addAttribute("message", message);
-			return new ResultVo(100, "false", "아이디 중복");
-			//return "memberJoin";
 		}
 
 	}
