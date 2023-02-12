@@ -4,7 +4,7 @@ function Logo1() {
     return(
             <LogoOne>
                 <LogoText1>당근나라</LogoText1>
-                <LogoImg src='https://firebasestorage.googleapis.com/v0/b/carrot-a1349.appspot.com/o/logo.png?alt=media&token=81e933b8-ace6-45b8-8dee-0e9e60d2d4a8' alt='' />
+                <LogoImg src='https://firebasestorage.googleapis.com/v0/b/dang-na-bun-gong.appspot.com/o/logo.png?alt=media&token=23ef5ad3-c197-4512-84da-8d665d88c942' alt='' />
                 <LogoText1>번개공주</LogoText1>
             </LogoOne>
     )
