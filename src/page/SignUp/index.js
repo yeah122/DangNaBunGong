@@ -7,7 +7,12 @@ import axios from "axios";
 
 function SignUp() {
 
-    const navigate = useNavigate;
+    const navigate = useNavigate();
+
+    const goHome = () => {
+        navigate('/')
+    }
+
 
     const [Password, setPassword] = useState(" ");
     const [ConfirmPassword, setConfirmPassword] = useState(" ");
@@ -63,7 +68,7 @@ function SignUp() {
 
     return(
         <SignUpMain>
-            <Logo1 />
+            <Logo1 onClick={goHome} />
             <SignUpArea>
                 <SignUpText>아이디</SignUpText>
                 <MakeId type='text' placeholder="영문, 숫자 5~10자" onChange={onIdHandler}></MakeId>

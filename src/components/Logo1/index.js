@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 
 function Logo1() {
+
+
     return(
             <LogoOne>
                 <LogoText1>당근나라</LogoText1>
