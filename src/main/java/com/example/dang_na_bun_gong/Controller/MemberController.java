@@ -89,7 +89,7 @@ public class MemberController {
 
 	@PostMapping("/memberJoinDo")
 	public @ResponseBody ResultVo memberJoinDo(MemberJoinDto memberJoinDto, Model model) {
-		boolean memberId, memberTel, memberMail, isTel, isMail;
+		boolean memberId, memberTel, memberMail, isTel, isMail,isPw;
 
 		//null값 확인
 		String null_id = memberJoinDto.getMemberid();
@@ -109,6 +109,15 @@ public class MemberController {
 			String message = "이미 존재하는 아이디입니다.";
 			model.addAttribute("message", message);
 			return new ResultVo(100, "false", "아이디 중복");
+		}
+
+		//비밀번호양식확인
+		isPw = Pattern.matches("^([a-zA-Z]+[0-9]+\\W+)", memberJoinDto.getMemberpw());
+		if (!isPw) { // isTel == true
+			System.out.println("유효하지 않은 형식의 비밀번호");
+			String message = "비밀번호는 영어+숫자+특수문자으로 만들어주십시오.";
+			model.addAttribute("message", message);
+			return new ResultVo(200, "false", "유효하지않은비밀번호");
 		}
 
 		//전화번호 양식 확인
