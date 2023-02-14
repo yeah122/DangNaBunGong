@@ -2,8 +2,6 @@ package com.example.dang_na_bun_gong.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,13 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dang_na_bun_gong.Entity.BoardEntity;
-import com.example.dang_na_bun_gong.Repository.BoardRepository;
+import com.example.dang_na_bun_gong.Repository.ArticleRepository;
 
 @Service
 public class BoardService {
 	
 	@Autowired
-	private BoardRepository boardRepository;
+	private ArticleRepository boardRepository;
 	
 	//게시글 작성
 	public void write(BoardEntity board, List<MultipartFile> file) throws IOException{

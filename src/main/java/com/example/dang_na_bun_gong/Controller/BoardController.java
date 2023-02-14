@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.dang_na_bun_gong.Entity.BoardEntity;
+import com.example.dang_na_bun_gong.Entity.ArticleEntity;
 import com.example.dang_na_bun_gong.Service.BoardService;
 
 @Controller
@@ -29,8 +29,8 @@ public class BoardController {
 	private BoardService boardService;
 
 	//게시글 작성 page
-	@GetMapping("/board/write")
-	public String boardWrite(Model model, HttpSession session) {
+	@GetMapping("/article/write")
+	public String articleWrite(Model model, HttpSession session) {
 		model.addAttribute("userid", session.getAttribute("userid"));
 		return "board";
 	}
