@@ -8,6 +8,15 @@
   padding: 0px 20px;
 }
 
+.input:focus {
+  outline: none;
+  border: 1px solid #f21111;
+}
+
+.input:focus::placeholder {
+  color: #f21111;
+}
+
 .btn {
   width: 298px;
   height: 61px;
@@ -32,6 +41,11 @@
 .search-info {
   font-weight: 500;
   font-size: 14px;
+}
+
+.search-info a {
+  text-decoration: none;
+  color: black;
 }
 
 .logo-text {
