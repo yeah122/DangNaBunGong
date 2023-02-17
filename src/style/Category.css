@@ -1,3 +1,70 @@
-.category-btn {
+/*디자인과 관련된 코드*/
+.category button {
+  width: 97px;
+  height: 63px;
+  background-color: white;
+  border: 1px solid #bdbdbd;
+}
+
+.category-box {
+  border: 1px solid #bdbdbd;
   display: inline-block;
+}
+
+.category-lst {
+  text-decoration: none;
+  color: black;
+  list-style-type: none;
+}
+
+.recent span {
+  font-size: 12px;
+  text-align: center;
+  display: block;
+  margin: 5px 0px;
+}
+
+/*배치와 관련된 코드*/
+.category {
+  display: inline-block;
+}
+
+.category ul {
+  padding: 0px;
+  margin: 20px 40px;
+}
+
+.category li {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.category {
+  position: fixed;
+  right: 10px;
+  top: 60px;
+  padding-left: 10px;
+}
+
+.menu {
+  position: fixed;
+  right: 117px;
+  top: 60px;
+}
+
+.recent {
+  position: fixed;
+  right: 10px;
+  top: 133px;
+  width: 95px;
+  height: 260px;
+}
+
+.recent ul {
+  padding: 0px;
+  text-align: center;
+}
+
+.recent li {
+  margin: 20px 0px;
 }

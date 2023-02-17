@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { categories } from "./CategoryLst";
 import "../style/Category.css";
 import Recent from "./Recent";
+import { HiMenu } from "react-icons/hi";
 
 const CategoryModal = () => {
   const [select, setSelect] = useState(0);
@@ -20,17 +21,20 @@ const CategoryModal = () => {
   return (
     <>
       <div
-        className="category-btn"
+        className="category"
         onMouseOver={onMouseOver}
         onMouseOut={onMouseOut}
       >
-        <button>카테고리</button>
+        <button>
+          <HiMenu fontSize={30} />
+        </button>
+
         {hover && (
           <>
-            <div>
-              <ul>
+            <div className="category-box menu">
+              <ul className="category-lst">
                 {categories.map((item) => (
-                  <Link to={`/${item.path}`}>
+                  <Link className="category-lst" to={`/${item.path}`}>
                     <li key={item.id} onMouseOver={() => setSelect(item.id)}>
                       {item.name}
                     </li>

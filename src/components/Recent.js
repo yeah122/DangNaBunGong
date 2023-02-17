@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "../style/Category.css";
 
 const Recent = () => {
   const [items, setItems] = useState([]);
@@ -21,11 +22,11 @@ const Recent = () => {
   }, []);
 
   return (
-    <div>
+    <div className="category-box recent">
       <span>최근 본 상품</span>
-      <ul>
+      <ul className="category-lst">
         {items.map((item) => (
-          <Link to={item.link}>
+          <Link className="category-lst" to={item.link}>
             <li key={item.id}>
               <img src={item.img} height={50} width={50} />
             </li>
