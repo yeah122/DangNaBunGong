@@ -1,0 +1,53 @@
+/* 디자인에 관한 코드 */
+.contact-phone {
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.footer-nav-item {
+  color: black;
+}
+
+.footer {
+  background-color: #f1f1f1;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+/* 배치에 관한 코드 */
+.contact-box {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.contact-phone {
+  margin-right: 20px;
+}
+
+.contact-info {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.footer {
+  text-align: center;
+  margin: 0px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-nav {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.footer-nav-item {
+  margin-right: 20px;
+  margin-left: 20px;
+}
