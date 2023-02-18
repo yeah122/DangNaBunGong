@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dang_na_bun_gong.Entity.MemberEntity;
 import com.example.dang_na_bun_gong.Repository.MemberRepository;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MemberService {
@@ -19,7 +20,7 @@ public class MemberService {
 	
 	//아이디 확인
 	public boolean memberIDcheck(String memberid) {
-		
+
 		return memberRepository.existsById(memberid);
 	}
 

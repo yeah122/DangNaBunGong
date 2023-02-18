@@ -45,9 +45,6 @@ public class MemberEntity {
     @Column(name = "member_changed")
     private Timestamp memberchanged;
 
-    public MemberEntity() {
-
-    }
 
     @Builder
     public MemberEntity(String memberid, String memberpw, String membername, String membertel, String membermail, Timestamp membercreated, String membergender, String memberbirth, Integer memberregion, Timestamp memberchanged) {
@@ -61,5 +58,9 @@ public class MemberEntity {
         this.memberbirth = memberbirth;
         this.memberregion = memberregion;
         this.memberchanged = memberchanged;
+    }
+
+    public MemberEntity() {
+
     }
 }

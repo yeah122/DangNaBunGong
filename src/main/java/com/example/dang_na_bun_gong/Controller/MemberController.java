@@ -146,7 +146,7 @@ public class MemberController {
 			model.addAttribute("message", message);
 			return new ResultVo(205, "false", "메일 양식 오류");
 		}
-"
+
 		//이메일 중복 확인
 		memberMail = memberService.memberMailcheck(memberJoinDto.getMembermail());
 		if (memberMail) { // memberMail == true
