@@ -2,10 +2,18 @@ package com.example.dang_na_bun_gong.Controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.dang_na_bun_gong.DTO.ArticleDto;
+import com.example.dang_na_bun_gong.DTO.MainDto;
+import com.example.dang_na_bun_gong.Vo.ResultVo;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -13,10 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.dang_na_bun_gong.Entity.BoardEntity;
@@ -27,6 +32,31 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+
+    //main페이지
+    @GetMapping("/main")
+    public @ResponseBody ResultVo main(){
+        List<ArticleDto> mainCurrent = boardService.mainPage_current();
+        List<ArticleDto> mainPopular = boardService.mainPage_popular();
+
+        JSONObject jsonObject = new JSONObject();
+        List<MainDto> mainDto = new ArrayList<>();
+        for (int i=0; i<mainCurrent.size(); i++){
+            MainDto data = new MainDto(mainCurrent.get(i));
+            mainDto.add(data);
+        }
+        jsonObject.put("currnet", mainDto);
+        mainDto.clear();
+
+        for (int i=0; i<mainPopular.size(); i++){
+            MainDto data = new MainDto(mainPopular.get(i));
+            mainDto.add(data);
+        }
+        jsonObject.put("popular", mainDto);
+        mainDto.clear();
+
+        return new ResultVo(0, "true", "불러오기 성공", jsonObject.toString());
+    }
 
 	//게시글 작성 page
 	@GetMapping("/board/write")

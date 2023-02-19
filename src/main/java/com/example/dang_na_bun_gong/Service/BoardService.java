@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.dang_na_bun_gong.DTO.ArticleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,16 @@ public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardRepository;
-	
+
+    //main페이지
+    public List<ArticleDto> mainPage_current(){
+        return boardRepository.currentArticle();
+    }
+
+    public List<ArticleDto> mainPage_popular(){
+        return boardRepository.popularArticle();
+    }
+
 	//게시글 작성
 	public void write(BoardEntity board, List<MultipartFile> file) throws IOException{
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
