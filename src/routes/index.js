@@ -3,6 +3,9 @@ import MainHeader from "../components/MainHeader";
 import Logo1 from "../components/Logo1";
 import SignUp from "../page/SignUp";
 import SellPage from "../page/SellPage";
+import ProductPage from "../page/ProductPage";
+import FoundId from "../page/FoundId";
+import FoundPw from "../page/FoundPw";
 
 
 function RootRoute() {
@@ -12,6 +15,9 @@ function RootRoute() {
             <Route path="/" element={<MainHeader/>}/>
             <Route path="/SignUp" element={<SignUp/>}/>
             <Route path="/SellPage" element={<SellPage/>}/>
+            <Route path="/ProductPage" element={<ProductPage/>}/>
+            <Route path="/FoundId" element={<FoundId />}/>
+            <Route path="/FoundPw" element={<FoundPw />}/>
         </Routes>
         </BrowserRouter>
     )

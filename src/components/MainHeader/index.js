@@ -5,6 +5,9 @@ function MainHeader() {
 
     const navigate = useNavigate();
 
+    const goHome =() => {
+        navigate('/')
+    }
     const goSignUp =() => {
         navigate('/SignUp')
     }
@@ -21,7 +24,7 @@ function MainHeader() {
                     <LoginText onClick={goSignUp}>회원가입</LoginText>
                 </LoginSection>
                 <HeaderMain>
-                    <HeaderLogo>
+                    <HeaderLogo onClick={goHome}>
                         <Img src="https://firebasestorage.googleapis.com/v0/b/dang-na-bun-gong.appspot.com/o/logo.png?alt=media&token=23ef5ad3-c197-4512-84da-8d665d88c942"></Img>
                         <HeaderLogoTexts>
                             <HeaderLogoText>당근나라</HeaderLogoText>
@@ -65,12 +68,13 @@ display:flex;
 flex-direction: column;
 width: 100%;
 position:fixed;
+background-color: white;
 `
 
 const Header = styled.div`
 display:flex;
 flex-direction: column;
-width: 49.13rem;
+width: 48.13rem;
 margin: auto;
 background-color: white;
 `

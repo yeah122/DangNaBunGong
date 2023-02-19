@@ -34,10 +34,10 @@ function SellPage () {
                 <SellTextPart>
                     <SellText>카테고리</SellText>
                     <SellCategory>
-                    <SellSelect tyle="select">
+                    <SellSelect type="select">
                         <option value="1">대분류</option>
                     </SellSelect>
-                    <SellSelect tyle="select">
+                    <SellSelect type="select">
                         <option value="2">소분류</option>
                     </SellSelect>
                     </SellCategory>

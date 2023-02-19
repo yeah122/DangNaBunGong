@@ -69,6 +69,7 @@ function SignUp() {
     return(
         <SignUpMain>
             <Logo1 onClick={goHome} />
+            <SignUpInfo>필수 정보</SignUpInfo>
             <SignUpArea>
                 <SignUpText>아이디</SignUpText>
                 <MakeId type='text' placeholder="영문, 숫자 5~10자" onChange={onIdHandler}></MakeId>
@@ -87,6 +88,15 @@ function SignUp() {
                 <MakePw type='text' placeholder="" onChange={onNameHandler}></MakePw>
             </SignUpArea>
             <SignUpArea>
+                <SignUpText>거주지역</SignUpText>
+                <SelectAdress type='select'>
+                    <option value="1">시/도</option>
+                </SelectAdress>
+                <SelectAdress type='select'>
+                    <option value="1">시/구</option>
+                </SelectAdress>
+            </SignUpArea>
+            <SignUpArea>
                 <SignUpText>전화번호</SignUpText>
                 <MakeId type='tel' placeholder="" onChange={onTelHandler}></MakeId>
                 <CheckBtn>인증 받기</CheckBtn>
@@ -95,6 +105,18 @@ function SignUp() {
                 <SignUpText>이메일</SignUpText>
                 <MakeId type='email' placeholder="" onChange={onMailHandler}></MakeId>
                 <CheckBtn>인증 받기</CheckBtn>
+            </SignUpArea>
+            <SignUpInfo>추가 정보</SignUpInfo>
+            <SignUpArea>
+                <SignUpText>성별</SignUpText>
+                <ChooseSexSection>
+                <input type="radio" name="sex" value="man" /><ChooseSex>남</ChooseSex>
+                <input type="radio" name="sex" value="girl" /><ChooseSex>여</ChooseSex>
+                </ChooseSexSection>
+            </SignUpArea>
+            <SignUpArea>
+                <SignUpText>생년월일</SignUpText>
+                <ChooseBirthDay type="date" />
             </SignUpArea>
             <TOS />
             <SignUpBtnArea>
@@ -111,12 +133,21 @@ justify-content : center;
 align-items: center;`
 
 const SignUpArea = styled.div`
-`
+margin: 1rem auto;`
+
+const SignUpInfo = styled.p`
+font-size: 1rem;
+font-weight: 600;`
 
 const SignUpText = styled.p`
 font-size: 0.75rem;
 font-weight: 600;
 margin-bottom : 0.5rem;`
+
+const SelectAdress = styled.select`
+width: 6rem;
+height: 2rem;
+margin-right: 1rem;`
 
 const MakeId = styled.input`
 width: 14.25rem;
@@ -125,6 +156,22 @@ border: 1px solid rgb(189,189,189);
 border-radius : 5px;
 padding-left: 0.5rem;
 `
+
+const ChooseSexSection = styled.div`
+display:flex;
+flex-direction: row;
+height: 1.6rem;
+line-height: 0rem;
+margin-bottom: 1.5rem;`
+
+const ChooseSex = styled.p`
+margin-right: 1rem;
+margin-left: 0.2rem;`
+
+const ChooseBirthDay = styled.input`
+width: 9rem;
+height: 2rem;
+margin-bottom: 1rem;`
 
 const CheckBtn = styled.button`
 width: 3.94rem;
@@ -161,6 +208,7 @@ height: 3.812rem;
 border-radius: 5px;
 font-size: 1.38rem;
 font-weight: 500;
-cursor: pointer;`
+cursor: pointer;
+margin-bottom: 3rem;`
 
 export default SignUp;
