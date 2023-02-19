@@ -71,4 +71,11 @@ public class ArticleService {
         articleRepository.save(articleEntity);
     }
 
+    public ArticleEntity articleview(Integer id){
+
+        return articleRepository.findById(id).get();
+    }
+
+
+
 }
