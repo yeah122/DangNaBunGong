@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { categories } from "./CategoryLst";
 import "../style/Category.css";
-import Recent from "./Recent";
+import RecentView from "./RecentView";
 import { HiMenu } from "react-icons/hi";
 
 const CategoryModal = () => {
@@ -45,7 +45,7 @@ const CategoryModal = () => {
           </>
         )}
       </div>
-      <Recent />
+      <RecentView />
     </>
   );
 };

@@ -1,0 +1,11 @@
+/* 디자인과 관련된 코드 */
+.items a {
+  text-decoration: none;
+  color: black;
+}
+
+/* 배치와 관련된 코드 */
+.item {
+  display: inline-block;
+  margin: 10px 10px;
+}

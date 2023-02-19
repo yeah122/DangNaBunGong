@@ -3,8 +3,9 @@ import Login from "../routes/Login";
 import { ref, getDownloadURL } from "@firebase/storage";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "../routes/Home";
+import Main from "../routes/Main";
 import KakaoLogin from "../routes/KakaoLogin";
+import ItemList from "../routes/ItemList";
 
 function App() {
   // firebase에서 로고 이미지를 불러오고 있는가
@@ -36,8 +37,9 @@ function App() {
                 path="/loginDo"
                 element={<Login LogoImg={attachmentUrl} />}
               ></Route>
-              <Route path="/" element={<Home />}></Route>
+              <Route path="/" element={<Main />}></Route>
               <Route path="/kakaoLogin" element={<KakaoLogin />}></Route>
+              <Route path="/:path" element={<ItemList />}></Route>
             </Routes>
           </Router>
         </>

@@ -8,6 +8,7 @@
 
 .category-box {
   border: 1px solid #bdbdbd;
+  background: white;
   display: inline-block;
 }
 
@@ -42,22 +43,25 @@
 .category {
   position: fixed;
   right: 10px;
-  top: 60px;
+  top: 160px;
   padding-left: 10px;
+  z-index: 1;
 }
 
 .menu {
   position: fixed;
   right: 117px;
-  top: 60px;
+  top: 160px;
+  z-index: 1;
 }
 
 .recent {
   position: fixed;
   right: 10px;
-  top: 133px;
+  top: 233px;
   width: 95px;
   height: 260px;
+  z-index: 1;
 }
 
 .recent ul {

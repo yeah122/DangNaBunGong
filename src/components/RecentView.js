@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../style/Category.css";
 
-const Recent = () => {
+const RecentView = () => {
   const [items, setItems] = useState([]);
   useEffect(() => {
     // 최근 본 상품을 로컬스토리지에 n개씩 저장하는게 좋을 것 같다
@@ -37,4 +37,4 @@ const Recent = () => {
   );
 };
 
-export default Recent;
+export default RecentView;
