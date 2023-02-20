@@ -38,7 +38,7 @@ public class ArticleService {
             //file.get(i).transferTo(saveFile);
             System.out.println("uuid: " + fileName);
             f.transferTo(saveFile);
-            article.setPhotofp("/files/" + fileName);
+            article.setPhotofp("/files/" + fileName + ".jpg");
             fileCount += 1;
         }
 
@@ -57,7 +57,7 @@ public class ArticleService {
             fw.write(article.getArticlecontent());
             fw.flush();
             System.out.println("textFileName: " + textName);
-            article.setArticlecontentfp("/text/" + textName);
+            article.setArticlecontentfp("/text/" + textName + ".txt");
             // 객체 닫기
             fw.close();
 
