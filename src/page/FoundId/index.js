@@ -1,7 +1,18 @@
 import styled from "styled-components";
 import Logo1 from "../../components/Logo1";
+import {useNavigate} from 'react-router-dom';
 
 function FoundId() {
+
+    const navigate = useNavigate();
+
+    const goFoundPw = () => {
+        navigate('/FoundPw');
+    }
+    const goSignUp = () => {
+        navigate('/SignUp');
+    }
+
     return(
         <FoundIdArea>
         <FoundIdPage>
@@ -21,8 +32,8 @@ function FoundId() {
                 </FoundIdBtnSection>
                 <FoundIdOptionSection>
                     <FoundIdOption>로그인</FoundIdOption>
-                    <FoundIdOption>비밀번호 찾기</FoundIdOption>
-                    <FoundIdOption>회원가입</FoundIdOption>
+                    <FoundIdOption onClick={goFoundPw}>비밀번호 찾기</FoundIdOption>
+                    <FoundIdOption onClick={goSignUp}>회원가입</FoundIdOption>
                 </FoundIdOptionSection>
             </FoundIdSection>
         </FoundIdPage>
@@ -114,6 +125,7 @@ justify-content: center;`
 
 const FoundIdOption = styled.p`
 font-size: 0.74rem;
-margin: 0.5rem 0.5rem;`
+margin: 0.5rem 0.5rem;
+cursor: pointer;`
 
 export default FoundId;

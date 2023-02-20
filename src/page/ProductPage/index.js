@@ -44,6 +44,7 @@ function ProductPage() {
                             <ProductInformation>상품 이름:</ProductInformation>
                             <ProductInformation>가격:</ProductInformation>
                             <ProductInformation>거래 지역:</ProductInformation>
+                            <ProductTime>시간</ProductTime>
                         </ProductInfos>
                         <ButtonSection>
                             <LikeButton>
@@ -167,7 +168,7 @@ width: 20rem;
 border: 1px solid green;`
 
 const ProductInfos = styled.div`
-margin: 13rem 0 0.5rem;;
+margin: 11rem 0 0.5rem;;
 border: 1px solid blue;`
 
 const ProductInfo = styled.p`
@@ -177,6 +178,11 @@ margin-bottom: 1rem;`
 
 const ProductInformation = styled.p`
 margin: 0.8rem 0`
+
+const ProductTime = styled.p`
+font-size: 0.74rem;
+font-weight: 500;
+color: rgb(142,141,141);`
 
 const LikeButton = styled.button`
 width: 4.6rem;
