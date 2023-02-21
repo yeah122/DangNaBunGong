@@ -32,6 +32,8 @@ public class ArticleEntity {
     private Integer productcategoryid;
     @Column(name="region_id")
     private Integer regionid;
+    @Column(name="region_name")
+    private String regionname;
 
     @Column(name="like_cnt")
     private Integer likecnt;
@@ -59,6 +61,7 @@ public static ArticleEntity toSaveEntity(ArticleWriteDto articleWriteDto) {
     articleEntity.setPrice(articleWriteDto.getPrice());
     articleEntity.setArticlecreatede(articleWriteDto.getArticlecreatede());
     articleEntity.setRegionid(articleWriteDto.getRegionid());
+    articleEntity.setRegionname(articleWriteDto.getRegionname());
     articleEntity.setProductcategoryid(articleWriteDto.getProductcategoryid());
     articleEntity.setLikecnt(0);
     LocalDateTime now = LocalDateTime.now();

@@ -13,4 +13,6 @@ public class ResultVo {
 
     private String message;
 
+    private String data = null;
+
 }

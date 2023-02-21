@@ -24,6 +24,7 @@ public class ArticleWriteDto {
     private String price;
     private Integer productcategoryid;
     private Integer regionid;
+    private String regionname;
     private Timestamp articlecreatede;
     private Integer likecnt;
 

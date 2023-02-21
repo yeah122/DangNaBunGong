@@ -53,16 +53,16 @@ public class MemberController {
 		
 		if (loginCheck == 1) {
 			session.setAttribute("memberid", memberLoginDto.getMemberid());
-			return new ResultVo(0, "true", "로그인 성공");
+			return new ResultVo(0, "true", "로그인 성공",null);
 		}
 
 		else if(loginCheck == 0){
 			System.out.println("아이디나 비밀번호가 잘못되었습니다." + memberLoginDto.getMemberid());
-			return new ResultVo(208, "false", "아이디나 비밀번호가 잘못되었습니다.");
+			return new ResultVo(208, "false", "아이디나 비밀번호가 잘못되었습니다.",null);
 		}
 
 		else {//음수 혹은 2 이상일 때
-			return new ResultVo(200, "false", "회원정보가 잘못되었습니다. 고객센터에 문의바랍니다.");
+			return new ResultVo(200, "false", "회원정보가 잘못되었습니다. 고객센터에 문의바랍니다.",null);
 		}
 	}
 
@@ -99,7 +99,7 @@ public class MemberController {
 		String null_mail = memberJoinDto.getMembermail();
 
 		if(null_id.isEmpty() || null_pw.isEmpty() || null_name.isEmpty() || null_mail.isEmpty() || null_tel.isEmpty()){
-			return new ResultVo(101, "false", "필수 입력 정보를 모두 입력해주십시오.");
+			return new ResultVo(101, "false", "필수 입력 정보를 모두 입력해주십시오.",null);
 		}
 
 		//아이디 중복 확인
@@ -108,7 +108,7 @@ public class MemberController {
 			System.out.println("이미 존재하는 아이디");
 			String message = "이미 존재하는 아이디입니다.";
 			model.addAttribute("message", message);
-			return new ResultVo(201, "false", "아이디 중복");
+			return new ResultVo(201, "false", "아이디 중복",null);
 		}
 
 		//비밀번호양식확인
@@ -117,7 +117,7 @@ public class MemberController {
 			System.out.println("유효하지 않은 형식의 비밀번호");
 			String message = "비밀번호는 영어+숫자+특수문자으로 만들어주십시오.";
 			model.addAttribute("message", message);
-			return new ResultVo(202, "false", "비밀번호 양식 오류");
+			return new ResultVo(202, "false", "비밀번호 양식 오류",null);
 		}
 
 		//전화번호 양식 확인
@@ -126,7 +126,7 @@ public class MemberController {
 			System.out.println("유효하지 않은 형식의 전화번호");
 			String message = "유효한 전화번호를 입력해주십시오.";
 			model.addAttribute("message", message);
-			return new ResultVo(203, "false", "전화번호 양식오류");
+			return new ResultVo(203, "false", "전화번호 양식오류",null);
 		}
 
 		//전화번호 중복 확인
@@ -135,7 +135,7 @@ public class MemberController {
 			System.out.println("이미 존재하는 전화번호");
 			String message = "이미 사용 중인 전화번호입니다.";
 			model.addAttribute("message", message);
-			return new ResultVo(204, "false", "전화번호 중복");
+			return new ResultVo(204, "false", "전화번호 중복",null);
 		}
 
 		//이메일 양식 확인"^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$"
@@ -144,7 +144,7 @@ public class MemberController {
 			System.out.println("유효하지 않은 형식의 이메일");
 			String message = "유효한 이메일 입력해주십시오.";
 			model.addAttribute("message", message);
-			return new ResultVo(205, "false", "메일 양식 오류");
+			return new ResultVo(205, "false", "메일 양식 오류",null);
 		}
 
 		//이메일 중복 확인
@@ -153,7 +153,7 @@ public class MemberController {
 			System.out.println("이미 존재하는 이메일");
 			String message = "이미 사용 중인 이메일입니다.";
 			model.addAttribute("message", message);
-			return new ResultVo(206, "false", "메일 중복");
+			return new ResultVo(206, "false", "메일 중복",null);
 		}
 
 		//회원가입 실행
@@ -162,14 +162,14 @@ public class MemberController {
 			if(memberService.memberIDcheck(findMember)) { //회원 정보 삽입 후 확인
 				String message = "회원가입이 완료되었습니다.";
 				model.addAttribute("message", message);
-				return new ResultVo(0, "true", "회원가입 성공");
+				return new ResultVo(0, "true", "회원가입 성공",null);
 				//return "memberJoin";
 			}
 			else {
 				System.out.println("가입 실패");
 				String message = "가입 실패";
 				model.addAttribute("message", message);
-				return new ResultVo(300, "false", "회원가입 실패");
+				return new ResultVo(300, "false", "회원가입 실패",null);
 				//return "memberJoin";
 			}
 		}
