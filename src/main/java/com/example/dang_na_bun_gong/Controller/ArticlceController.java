@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -29,7 +30,7 @@ public class ArticlceController {
 return "board";
     }
 @PostMapping("/articleWriteDo")
-    public ResultVo articleWritedo(ArticleWriteDto article, List<MultipartFile> file, HttpSession session) throws IOException {
+    public @ResponseBody ResultVo articleWritedo(ArticleWriteDto article, List<MultipartFile> file, HttpSession session) throws IOException {
     String userid = session.getAttribute("memberid").toString();
 
     article.setSellmemberid(userid);
@@ -56,7 +57,7 @@ return "board";
 }
 
     @GetMapping("/articleView") // localhost:8080/article/View?id=1
-    public ResultVo articleView(Model model, Integer id) {
+    public @ResponseBody ResultVo articleView(Model model, Integer id) {
     model.addAttribute("article",articleService.articleview(id));
 
 

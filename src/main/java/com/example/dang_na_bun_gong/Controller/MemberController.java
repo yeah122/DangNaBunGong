@@ -204,7 +204,18 @@ public class MemberController {
 
         return "mypage";
     }
+	@GetMapping("/memberIdCheck")
+	public @ResponseBody ResultVo memberIdCheck(MemberJoinDto memberJoinDto){
+		boolean memberId;
+		memberId = memberService.memberIDcheck(memberJoinDto.getMemberid());
+		if (memberId) { // memberid == true
+			System.out.println("이미 존재하는 아이디");
+			return new ResultVo(201, "false", "아이디 중복",null);
+		}else {
+			return new ResultVo(0, "true", "중복아님",null);
+		}
 
+	}
 	// 회원정보 수정
 	/*@GetMapping("/member/modify") // localhost:8080/board/view?id=1
 	public String memberModify(Model model, HttpSession session, MemberEntity memberEntity) {
