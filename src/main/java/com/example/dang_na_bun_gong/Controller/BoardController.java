@@ -55,6 +55,9 @@ public class BoardController {
         jsonObject.put("popular", mainDto);
         mainDto.clear();
 
+        String aaa = jsonObject.toString();
+        System.out.println(aaa);
+
         return new ResultVo(0, "true", "불러오기 성공", jsonObject.toString());
     }
 

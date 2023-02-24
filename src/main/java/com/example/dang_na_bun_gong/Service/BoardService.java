@@ -49,8 +49,6 @@ public class BoardService {
         	f.transferTo(saveFile);
         	fileCount += 1;
         }
-        
-
 
         /*Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
         
