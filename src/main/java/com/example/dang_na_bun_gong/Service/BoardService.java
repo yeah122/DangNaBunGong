@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.UUID;
 
 import com.example.dang_na_bun_gong.DTO.ArticleDto;
+import com.example.dang_na_bun_gong.DTO.ProductCategoryDto;
+import com.example.dang_na_bun_gong.Entity.CategoryEntity;
+import com.example.dang_na_bun_gong.Entity.RegionEntity;
+import com.example.dang_na_bun_gong.Repository.ProductCategoryRepository;
+import com.example.dang_na_bun_gong.Repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,16 +28,31 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 
+    @Autowired
+    private ProductCategoryRepository productCategoryRepository;
+
+    @Autowired
+    private RegionRepository regionRepository;
+
     //main페이지
-    public List<ArticleDto> mainPage_current(){
+    public List<ArticleDto> mainPage_current(){ // 최근 게시글 15개
         return boardRepository.currentArticle();
     }
 
-    public List<ArticleDto> mainPage_popular(){
+    public List<ArticleDto> mainPage_popular(){// 인기 게시글 15개
         return boardRepository.popularArticle();
     }
 
-	//게시글 작성
+    public List<CategoryEntity> mainPage_product_category(){ // 상품 카테고리
+        return productCategoryRepository.findAll();
+    }
+
+    public List<RegionEntity> mainPage_region(){ // 상품 카테고리
+        return regionRepository.findAll();
+    }
+
+
+    //게시글 작성
 	public void write(BoardEntity board, List<MultipartFile> file) throws IOException{
 		String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 

@@ -8,11 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 
 import com.example.dang_na_bun_gong.DTO.ArticleDto;
 import com.example.dang_na_bun_gong.DTO.MainDto;
+import com.example.dang_na_bun_gong.DTO.ProductCategoryDto;
+import com.example.dang_na_bun_gong.Entity.CategoryEntity;
+import com.example.dang_na_bun_gong.Entity.RegionEntity;
 import com.example.dang_na_bun_gong.Vo.ResultVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.web.PageableDefault;
@@ -38,6 +43,8 @@ public class BoardController {
     public @ResponseBody ResultVo main(){
         List<ArticleDto> mainCurrent = boardService.mainPage_current();
         List<ArticleDto> mainPopular = boardService.mainPage_popular();
+        List<CategoryEntity> mainCategory = boardService.mainPage_product_category();
+        List<RegionEntity> mainRegion = boardService.mainPage_region();
 
         JSONObject jsonObject = new JSONObject();
         List<MainDto> mainDto = new ArrayList<>();
@@ -54,6 +61,9 @@ public class BoardController {
         }
         jsonObject.put("popular", mainDto);
         mainDto.clear();
+
+        jsonObject.put("productCategory", mainCategory);
+        jsonObject.put("region", mainRegion);
 
         String aaa = jsonObject.toString();
         System.out.println(aaa);
