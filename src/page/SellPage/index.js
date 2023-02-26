@@ -1,22 +1,75 @@
 import MainHeader from "../../components/MainHeader";
 import styled from "styled-components";
+import {useState} from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function SellPage () {
+
+    const navigate = useNavigate();
+
+    const goHome =() =>{
+        navigate('/')
+    }
+
+    const [Title, setTitle] = useState("");
+    const [Content, setContent] = useState("")
+    const [Price, setPrice] = useState("")
+    const [Photo, setPhoto] = useState("")
+    const [Category, setCategory] = useState("")
+    const [Region, setRegion] = useState("")
+
+    const onTitleHandler = (e) => {
+        setTitle(e.currentTarget.value)
+    }
+    const onContentHandler = (e) => {
+        setContent(e.currentTarget.value)
+    }
+    const onPriceHandler = (e) => {
+        setPrice(e.currentTarget.value)
+    }
+    const onPhotoHandler = (e) => {
+        setPhoto(e.currentTarget.value)
+    }
+    const onCategoryHandler = (e) => {
+        setCategory(e.currentTarget.value)
+    }
+    const onRegionHandler = (e) => {
+        setRegion(e.currentTarget.value)
+    }
+
+    async function postArticleData() {
+        try{
+            const response = await axios.post("", {
+                articletitle: Title,
+                articlecontent: Content,
+                price: Price,
+                photofp: Photo,
+                regionname: Region,
+                productcategory: Category
+            });
+            if(response.data.stateCode = 0){
+                alert("게시글을 정상적으로 생성했습니다.")
+            }
+            else if(response.data.stateCode = 301){
+                alert("정보를 모두 입력해주십시오.")
+            }
+        }catch(error){}
+    }
+
     return(
         <SellPages>
-            <div>
             <MainHeader />
-            </div>
             <SellSection>
                 <SellTitle>상품 등록</SellTitle>
                 <SellTextPart>
                     <SellText>제목</SellText>
-                    <SellInput tyle="text"></SellInput>
+                    <SellInput tyle="text" onChange={onTitleHandler}></SellInput>
                 </SellTextPart>
                 <SellTextPart>
                     <SellExplainTitle>상품이미지</SellExplainTitle>
                     <SellPicPart>
-                        <SellPic>
+                        <SellPic onChange={onPhotoHandler}>
                             <PicIcon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
@@ -35,28 +88,28 @@ function SellPage () {
                     <SellText>카테고리</SellText>
                     <SellCategory>
                     <SellSelect type="select">
-                        <option value="1">대분류</option>
+                        <option onChange={onCategoryHandler} value="1">대분류</option>
                     </SellSelect>
                     <SellSelect type="select">
-                        <option value="2">소분류</option>
+                        <option onChange={onCategoryHandler} value="2">소분류</option>
                     </SellSelect>
                     </SellCategory>
                 </SellTextPart>
                 <SellTextPart>
                     <SellText>가격</SellText>
-                    <SellInput tyle="text"></SellInput>
+                    <SellInput onChange={onPriceHandler} tyle="text"></SellInput>
                 </SellTextPart>
                 <SellTextPart>
                     <SellText>거래 지역</SellText>
-                    <SellInput tyle="text"></SellInput>
+                    <SellInput onChange={onRegionHandler} type="text"></SellInput>
                 </SellTextPart>
                 <SellTextPart>
                     <SellExplainTitle>상품 소개</SellExplainTitle>
-                    <SellExplain tyle="text"></SellExplain>
+                    <SellExplain onChange={onContentHandler} tyle="text"></SellExplain>
                 </SellTextPart>
                 <SellButtons>
-                    <SellButton>등록하기</SellButton>
-                    <SellCancelButton>취소</SellCancelButton>
+                    <SellButton onClick={postArticleData}>등록하기</SellButton>
+                    <SellCancelButton onClick={goHome}>취소</SellCancelButton>
                 </SellButtons>
             </SellSection>
         </SellPages>

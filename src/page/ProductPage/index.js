@@ -3,22 +3,48 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import NextArrow from "../../components/NextArrow";
 
 
 function ProductPage() {
 
-
-    
         const Settings ={
             dots: true,
-            infinite: false,
+            infinite: true,
             speed: 500,
             slidesToShow: 5,
-            slidesToScroll: 1,
+            slidesToScroll: 5,
             autoPlay:false,
-             NextArrow:
-                     <NextArrow></NextArrow>
+            arrow: false,
+            nextArrow: <NextTo>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+</svg>
+            </NextTo>,
+            prevArrow :<PrevTo>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+</svg>
+            </PrevTo>
+        }
+
+        const settings = {
+            dots: true,
+            infinite: true,
+            speed:500,
+            slidesToShow: 1,
+            slidesToScroll : 1,
+            autoPlay:false,
+            arrow:false,
+            nextArrow: <NextTo>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+</svg>
+            </NextTo>,
+            prevArrow :<PrevTo>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+</svg>
+            </PrevTo>
         }
     
     return(
@@ -29,13 +55,9 @@ function ProductPage() {
                     <p>카테고리</p>
                 </ProductCategory>
                 <ProductPic>
-                    <ProductPics>
-                        <MainPic />
-                        <SubPicSection>
-                            <SubPic />
-                            <SubPic />
-                            <SubPic />
-                        </SubPicSection>
+                    <ProductPics {...settings}>
+                        <MainPic>1</MainPic>
+                        <MainPic>2</MainPic>
                     </ProductPics>
                     <ProductMainExplain>
                         <ProductInfos>
@@ -65,7 +87,6 @@ function ProductPage() {
                 <ProductRecommend>
                     <ProductRecommendTitleSection>
                         <ProductRecommendTitle>연관 상품</ProductRecommendTitle>
-                        <ProductRecommedNumber>1/5</ProductRecommedNumber>
                     </ProductRecommendTitleSection>
                     <ProductRecommenPicSection>
                         <StyledSlider {...Settings}>
@@ -121,21 +142,29 @@ height: 3rem;`
 
 const ProductPic = styled.div`
 width: 100%;
-height: 35rem;
+height: 30rem;
 border: 1px solid orange;
 display:flex;
 flex-direction: row;`
 
-const ProductPics = styled.div`
+const ProductPics = styled(Slider)`
 border: 1px solid green;
-width: 25.93rem;
-height: 33.25rem;
-margin: auto;`
+width: 20rem;
+height: 20rem;
+margin: auto;
+.slick-arrow {
+    display: flex;
+  }
+  .slick-prev::before,
+  .slick-next::before {
+    opacity: 0;
+    display: none;
+  }`
 
 const ProductMainExplain = styled.div`
 border: 1px solid green;
 width: 22.2rem;
-height: 33.25rem;
+height: 30rem;
 margin: auto;
 display:flex;
 flex-direction: column;`
@@ -151,8 +180,9 @@ border: 1px solid green;`
 const MainPic = styled.div`
 width: 20rem;
 height: 20rem;
-border: 1px solid blue;
-margin: 5rem auto 1rem;`
+background-color: yellow;
+// border: 1px solid blue;
+// margin: 5rem auto 1rem;`
 
 const SubPic = styled.div`
 width: 4rem;
@@ -168,7 +198,7 @@ width: 20rem;
 border: 1px solid green;`
 
 const ProductInfos = styled.div`
-margin: 11rem 0 0.5rem;;
+margin: 6rem 0 0.5rem;;
 border: 1px solid blue;`
 
 const ProductInfo = styled.p`
@@ -252,14 +282,71 @@ const StyledSlider = styled(Slider)`
   width:100%;
   height: 8.75rem;
   position: relative;
+  .slick-arrow {
+    display: flex;
+    width: 2rem;
+    height: 2rem;
+  }
   .slick-prev::before,
   .slick-next::before {
     opacity: 0;
     display: none;
-  }
-  .slick-slide div {
-    cursor: pointer;
-  }
-`
+  }`
+
+  const NextTo = styled.div`
+  display: flex;
+  position: absolute;
+  fill: white;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  color: white;
+  background-color: rgb(22,22,22,0.2);
+  z-index: 3;
+  margin: auto;
+  margin-right: 1.5rem;
+  padding: auto;
+  &:hover{
+    display: flex;
+  position: absolute;
+  fill: white;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  color: white;
+  background-color: rgb(22,22,22,0.2);
+  z-index: 3;
+  margin: auto;
+  margin-right: 1.5rem;
+  padding: auto;
+  }`
+
+  const PrevTo = styled.div`
+  display: flex;
+  position: absolute;
+  fill: white;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  color: white;
+  background-color: rgb(22,22,22,0.2);
+  z-index: 3;
+  margin: auto;
+  margin-left: 1.5rem;
+  padding: auto;
+  &:hover{
+    display: flex;
+  position: absolute;
+  fill: white;
+  width: 2rem;
+  height: 2rem;
+  text-align: center;
+  color: white;
+  background-color: rgb(22,22,22,0.2);
+  z-index: 3;
+  margin: auto;
+  margin-left: 1.5rem;
+  padding: auto;
+  }`
 
 export default ProductPage;

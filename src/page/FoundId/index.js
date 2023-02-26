@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Logo1 from "../../components/Logo1";
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
+import axios from "axios";
 
 function FoundId() {
 
@@ -13,6 +15,40 @@ function FoundId() {
         navigate('/SignUp');
     }
 
+    const [Name, setName] = useState(" ");
+    const [Tel, setTel] = useState(" ");
+
+    const onTelHandler = (event) => {
+        setTel(event.currentTarget.value);
+    };
+
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+    };
+
+    async function foundIdData() {
+        try{
+            const response = await axios.get("", {
+                membername:Name,
+                membertel:Tel,
+            });
+            if(response.data.stateCode == 0) {
+                navigate("/")
+                localStorage.setItem('Id', response.data.data);
+                alert("아이디 찾기에 성공했습니다. 아이디는 localStorage.getItem('Id')입니다.")
+            }
+            else if(response.data.stateCode == 101 ) {
+                alert("정보를 모두 입력해주세요.")
+            }
+            else if(response.data.stateCode == 203 ) {
+                alert("유효하지 않은 전화번호 입니다.")
+            }
+            else if(response.data.stateCode == 207 ) {
+                alert("일치하는 회원 정보가 없습니다.")
+            }
+        }catch(error){}
+    }
+
     return(
         <FoundIdArea>
         <FoundIdPage>
@@ -20,15 +56,15 @@ function FoundId() {
             <FoundIdSection>
                 <FoundIdTitle>아이디 찾기</FoundIdTitle>
                 <FoundIdInput>
-                    <FoundIdName type='text' placeholder="이름" />
+                    <FoundIdName onChange={onNameHandler} type='text' placeholder="이름" />
                     <FoundIdNumberSection>
-                    <FoundIdCallNumber type='text' placeholder='전화번호' />
+                    <FoundIdCallNumber onChange={onTelHandler} type='text' placeholder='전화번호' />
                     <FoundIdCallNumberButton>인증받기</FoundIdCallNumberButton>
                     </FoundIdNumberSection>
                     <FoundIdVerificationCode type="text" placeholder="인증번호" />
                 </FoundIdInput>
                 <FoundIdBtnSection>
-                    <FoundIdBtn>아이디 찾기</FoundIdBtn>
+                    <FoundIdBtn onClick={foundIdData}>아이디 찾기</FoundIdBtn>
                 </FoundIdBtnSection>
                 <FoundIdOptionSection>
                     <FoundIdOption>로그인</FoundIdOption>

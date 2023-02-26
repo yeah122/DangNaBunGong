@@ -6,6 +6,7 @@ import ProductPage from "../page/ProductPage";
 import FoundId from "../page/FoundId";
 import FoundPw from "../page/FoundPw";
 import MyPage from "../page/MyPage";
+import ChangePw from "../page/ChangePw";
 
 
 function RootRoute() {
@@ -19,6 +20,7 @@ function RootRoute() {
             <Route path="/FoundId" element={<FoundId />}/>
             <Route path="/FoundPw" element={<FoundPw />}/>
             <Route path="/MyPage" element={<MyPage />}/>
+            <Route path="/ChangePw" element={<ChangePw />}/>
         </Routes>
         </BrowserRouter>
     )

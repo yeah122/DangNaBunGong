@@ -1,9 +1,15 @@
 import styled from "styled-components";
+import {useState} from 'react';
 
 function TOS() {
+
+  const [Check, setCheck] = useState('');
+
+  const CheckHandlerButton = (e) => {
+    setCheck(e.target.value)
+  }
+
     return(
-        <TOSArea>
-            <SignUpText>이용약관</SignUpText>
             <TOSContent>
             제1조(목적) 이 약관은 당나번공 회사(전자상거래 사업자)가 운영하는 당근나라 번개공주 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리․의무 및 책임사항을 규정함을 목적으로 합니다.
 
@@ -245,10 +251,6 @@ function TOS() {
 
 ② “몰”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.
             </TOSContent>
-            <TOSAccept>
-            <input type='checkbox' />이용약관에 동의합니다.
-            </TOSAccept>
-        </TOSArea>
     )
 }
 

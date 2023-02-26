@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Logo1 from "../../components/Logo1";
 import {useNavigate} from 'react-router-dom';
+import {useState} from 'react';
+import axios from 'axios'
 
 function FoundPw() {
-
 
     const navigate = useNavigate();
 
@@ -13,6 +14,51 @@ function FoundPw() {
     const goSignUp = () => {
         navigate('/SignUp');
     }
+    const goChangePw = () => {
+        navigate('/SignUp');
+    }
+
+    const [Name, setName] = useState(" ");
+    const [Tel, setTel] = useState(" ");
+    const [Id, setId] = useState(" ");
+
+    const onIdHandler = (event) => {
+        setId(event.currentTarget.value);
+    };
+
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+    };
+
+    const onTelHandler = (event) => {
+        setTel(event.currentTarget.value);
+    };
+
+    async function foundPwData() {
+        try{
+            const response = await axios.get("", {
+                membername:Name,
+                membertel:Tel,
+                memberid:Id
+            });
+            if(response.data.stateCode == 0) {
+                navigate("/ChangePw")
+                alert("본인확인이 완료되었습니다. 비밀번호를 변경해주십시오.")
+            }
+            else if(response.data.stateCode == 101 ) {
+                alert("정보를 모두 입력해주세요.")
+            }
+            else if(response.data.stateCode == 203 ) {
+                alert("유효하지 않은 전화번호 입니다.")
+            }
+            else if(response.data.stateCode == 207 ) {
+                alert("일치하는 회원 정보가 없습니다.")
+            }
+            else if(response.data.statecode == 200 ) {
+                alert("회원 정보가 잘못되었습니다.")
+            }
+        }catch(error){}
+    }
 
     return(
         <FoundPwArea>
@@ -21,16 +67,16 @@ function FoundPw() {
             <FoundPwSection>
                 <FoundPwTitle>비밀번호 찾기</FoundPwTitle>
                 <FoundPwInput>
-                    <FoundPwName type='text' placeholder="이름" />
-                    <FoundPwName type='text' placeholder="아이디" />
+                    <FoundPwName onChange={onNameHandler} type='text' placeholder="이름" />
+                    <FoundPwName onChange={onIdHandler} type='text' placeholder="아이디" />
                     <FoundPwNumberSection>
-                    <FoundPwCallNumber type='text' placeholder='전화번호' />
+                    <FoundPwCallNumber onChange={onTelHandler} type='text' placeholder='전화번호' />
                     <FoundPwCallNumberButton>인증받기</FoundPwCallNumberButton>
                     </FoundPwNumberSection>
                     <FoundPwVerificationCode type="text" placeholder="인증번호" />
                 </FoundPwInput>
                 <FoundPwBtnSection>
-                    <FoundPwBtn>비밀번호 찾기</FoundPwBtn>
+                    <FoundPwBtn onClick={foundPwData}>비밀번호 찾기</FoundPwBtn>
                 </FoundPwBtnSection>
                 <FoundPwOptionSection>
                     <FoundPwOption>로그인</FoundPwOption>

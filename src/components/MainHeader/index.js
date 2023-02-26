@@ -75,6 +75,7 @@ flex-direction: column;
 width: 100%;
 position:fixed;
 background-color: white;
+z-index: 99;
 `
 
 const Header = styled.div`
