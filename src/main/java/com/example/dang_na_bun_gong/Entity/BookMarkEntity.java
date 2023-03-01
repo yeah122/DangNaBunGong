@@ -11,17 +11,17 @@ import static javax.persistence.FetchType.LAZY;
 @Entity
 @Table(name = "bookmark")
 public class BookMarkEntity {
+
+    @Column(name = "member_id")
+    private String member;
+
+
+    @Column(name = "article_id")
+    private Integer article;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "like")
     private Integer like;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private MemberEntity member;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id")
-    private ArticleEntity article;
 
 }

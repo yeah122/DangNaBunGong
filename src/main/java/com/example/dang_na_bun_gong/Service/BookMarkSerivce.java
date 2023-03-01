@@ -30,15 +30,13 @@ public class BookMarkSerivce {
         Integer articleId = bookmarkDTO.getArticleId();
         String memberId = bookmarkDTO.getMemberId();
 
-        ArticleEntity article = articleRepository.findById(articleId).orElseThrow();
-        MemberEntity member = memberRepository.findById(memberId).orElseThrow();
 
         BookMarkEntity bookMark = new BookMarkEntity();
-        bookMark.setArticle(article);
-        bookMark.setMember(member);
+        bookMark.setArticle(articleId);
+        bookMark.setMember(memberId);
 
         bookMarkRepository.save(bookMark);
-
+        articleRepository.increaseLikeCnt(articleId);
 
     }
 
@@ -47,10 +45,22 @@ public class BookMarkSerivce {
         String memberId = bookMarkDto.getMemberId();
 
         BookMarkEntity bookMark = bookMarkRepository.findByMemberAndArticle(articleId, memberId);
-        if (bookMark == null) {
-            ResultVo resultVo = new ResultVo(203,"false","좋아요삭제 실패",null);
-        }
 
         bookMarkRepository.delete(bookMark);
+        articleRepository.decreaseLikeCnt(articleId);
     }
+    public Integer Likecheck(Integer articleId,String memberId) {
+
+
+         BookMarkEntity bookMark = bookMarkRepository.findByMemberAndArticle(articleId, memberId);
+
+         if(bookMark == null){
+             return 0;
+         }else{
+             return 1;
+         }
+
+    }
+
+
 }

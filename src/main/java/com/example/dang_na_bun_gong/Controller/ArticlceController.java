@@ -1,10 +1,13 @@
 package com.example.dang_na_bun_gong.Controller;
 
 import com.example.dang_na_bun_gong.DTO.ArticleWriteDto;
+import com.example.dang_na_bun_gong.DTO.BookMarkDto;
 import com.example.dang_na_bun_gong.Entity.ArticleEntity;
 import com.example.dang_na_bun_gong.Service.ArticleService;
+import com.example.dang_na_bun_gong.Service.BookMarkSerivce;
 import com.example.dang_na_bun_gong.Vo.ResultVo;
 import lombok.Getter;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,9 @@ import java.util.List;
 public class ArticlceController {
     @Autowired
     private ArticleService articleService;
+
+    @Autowired
+    private BookMarkSerivce bookMarkSerivce;
 
 
 @GetMapping("/articleWrite")
@@ -57,14 +63,37 @@ return "board";
 }
 
     @GetMapping("/articleView") // localhost:8080/article/View?id=1
-    public @ResponseBody ResultVo articleView(Model model, Integer id) {
+    public @ResponseBody ResultVo articleView(Model model, Integer id, HttpSession session) {
+        int likecheck;
     model.addAttribute("article",articleService.articleview(id));
 
+        String memberId = (String)session.getAttribute("memberid");
 
-        ArticleEntity jsonObject = articleService.articleview(id);
-        System.out.println(jsonObject.toString());
+       /* if(memberId == null) {
+            System.out.println("세션에 로그인값이 존재 하지 않음");
+            likecheck = 3;
 
-        return new ResultVo(0, "true", "불러오기 성공", jsonObject.toString());
+            ArticleEntity jsonObject = articleService.articleview(id);
+            System.out.println(jsonObject.toString());
+
+
+            return new ResultVo(0, "true", "불러오기 성공", jsonObject.toString()+ ", likecheck: " + likecheck);
+        }
+
+        */
+
+            likecheck = bookMarkSerivce.Likecheck(id, memberId);
+
+
+            ArticleEntity jsonObject = articleService.articleview(id);
+            System.out.println(jsonObject.toString());
+
+
+            return new ResultVo(0, "true", "불러오기 성공", jsonObject.toString()+ ", likecheck: " + likecheck);
+
+
+
+
     }
 
 
