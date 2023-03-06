@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Logo1 from "../../components/Logo1";
 import {useNavigate} from 'react-router-dom';
+import axios from "axios";
 import {useState} from 'react';
 
 function ChangePw() {
@@ -24,18 +25,25 @@ function ChangePw() {
         setConfirmNewPw(e.currentTarget.value)
     }
 
-    const postNewPw = () =>{
+    async function postNewPw (){
+        try{ const response = await axios.patch("", {
+            memberpw : NewPw
+        });
         if(NewPw !== ConfirmNewPw) {
-            alert ('비밀번호와 비밀번호 확인이 같지 않습니다.')
+            alert ('비밀번호를 다시 한번 확인해주세요.')
         }
         else if (NewPw == '' && ConfirmNewPw == '') {
-            alert ('비밀번호를 입력해주세요.')
+            alert ('정보를 입력해주세요.')
         }
-        else if (NewPw == ConfirmNewPw) {
+        else if (response.data.stateCode == 202) {
+            alert ('비밀번호 양식을 확인해주세요.')
+        }
+        else if (response.data.stateCode == 0) {
             alert ('비밀번호가 변경되었습니다.')
             navigate ('/로그인')
         }
-    }
+    }catch(error){}
+}
 
     return(
         <FoundPwArea>

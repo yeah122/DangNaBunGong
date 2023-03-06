@@ -76,7 +76,7 @@ function SignUp() {
                  memberregion : Region
              });
              if(response.data.stateCode == 0) {
-                 navigate("/")
+                 navigate("/로그인")
                  alert("가입이 완료되었습니다.")
              }
              else if(response.data.stateCode == 300 ) {
@@ -141,11 +141,11 @@ function SignUp() {
             </SignUpArea>
             <SignUpArea>
                 <SignUpText>비밀번호</SignUpText>
-                <MakePw type='password'  onChange={onPasswordHandler} value={Password} placeholder="영문, 숫자, 특수문자 조합 최소 8자"></MakePw>
+                <MakePw type='password'  onChange={onPasswordHandler} placeholder="영문, 숫자, 특수문자 조합 최소 8자"></MakePw>
             </SignUpArea>
             <SignUpArea>
                 <SignUpText>비밀번호 확인</SignUpText>
-                <MakePw type='password' onChange={onConfirmPasswordHandler} value={ConfirmPassword} placeholder="비밀번호 확인"></MakePw>
+                <MakePw type='password' onChange={onConfirmPasswordHandler} placeholder="비밀번호 확인"></MakePw>
             </SignUpArea>
             <SignUpArea>
                 <SignUpText>이름</SignUpText>

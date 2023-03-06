@@ -1,13 +1,21 @@
 import styled from "styled-components";
+import {useNavigate} from 'react-router-dom';
 
 function MyProfile() {
+
+    const navigate = useNavigate();
+
+    const goRewrite =() =>{
+        navigate('/RewriteMyProfile');
+    }
+
     return(
         <MyPageProfile>
             <MyPageProfileImg></MyPageProfileImg>
             <MyPageProfileTexts>
                 <MyPageProfileText>
                     <MyPageNickName>닉네임</MyPageNickName>
-                    <MyPageProfileBtn>프로필 수정</MyPageProfileBtn>
+                    <MyPageProfileBtn onClick={goRewrite}>프로필 수정</MyPageProfileBtn>
                 </MyPageProfileText>
                 <MyPageIntroduce>소개글</MyPageIntroduce>
             </MyPageProfileTexts>

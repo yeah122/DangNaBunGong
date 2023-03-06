@@ -7,6 +7,9 @@ import FoundId from "../page/FoundId";
 import FoundPw from "../page/FoundPw";
 import MyPage from "../page/MyPage";
 import ChangePw from "../page/ChangePw";
+import DeleteAccount from "../page/DeleteAccount";
+import SellProduct from "../page/SellProduct";
+import RewriteMyProfile from "../page/RewriteMyProfile";
 
 
 function RootRoute() {
@@ -21,6 +24,9 @@ function RootRoute() {
             <Route path="/FoundPw" element={<FoundPw />}/>
             <Route path="/MyPage" element={<MyPage />}/>
             <Route path="/ChangePw" element={<ChangePw />}/>
+            <Route path="/DeleteAccount" element={<DeleteAccount />}/>
+            <Route path="/SellProduct" element={<SellProduct />}/>
+            <Route path="/RewriteMyProfile" element={<RewriteMyProfile />}/>
         </Routes>
         </BrowserRouter>
     )
