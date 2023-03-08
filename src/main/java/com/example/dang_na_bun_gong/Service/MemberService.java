@@ -2,6 +2,7 @@ package com.example.dang_na_bun_gong.Service;
 
 import java.util.List;
 
+import com.example.dang_na_bun_gong.DTO.MemberDeleteDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.dang_na_bun_gong.Entity.MemberEntity;
 import com.example.dang_na_bun_gong.Repository.MemberRepository;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class MemberService {
@@ -67,5 +67,13 @@ public class MemberService {
 
         return memberRepository.findAll(pageable);
     }
+
+	public void memberDelete(MemberDeleteDto memberDeleteDto){
+		String memberid = memberDeleteDto.getMemberid();
+		List<MemberEntity> memberEntity = memberRepository.findByMemberid(memberid);
+		memberRepository.delete((MemberEntity) memberEntity);
+
+	}
+
     
 }

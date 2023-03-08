@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -214,6 +215,15 @@ public class MemberController {
 		}else {
 			return new ResultVo(0, "true", "중복아님",null);
 		}
+
+	}
+
+	@DeleteMapping("/memberDelete")
+	public @ResponseBody ResultVo meberdelete(HttpSession session){
+		List<MemberEntity> member = null;
+		 member = memberService.memberInfo(session.getAttribute("memberid").toString());
+
+		memberService.memberDelete(member);
 
 	}
 	// 회원정보 수정
