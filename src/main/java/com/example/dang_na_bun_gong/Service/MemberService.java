@@ -3,6 +3,8 @@ package com.example.dang_na_bun_gong.Service;
 import java.util.List;
 
 import com.example.dang_na_bun_gong.DTO.MemberDeleteDto;
+import com.example.dang_na_bun_gong.Entity.MemberDeleteEntity;
+import com.example.dang_na_bun_gong.Repository.MemberDeleteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,8 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
+	@Autowired
+	private MemberDeleteRepository memberDeleteRepository;
 	
 	//아이디 확인
 	public boolean memberIDcheck(String memberid) {
@@ -41,7 +45,7 @@ public class MemberService {
 	}
 	
 	//회원 정보 가져오기
-    public List<MemberEntity> memberInfo(String memberid) {
+    public MemberEntity memberInfo(String memberid) {
     	System.out.println("memberid: " + memberid);
 
         return memberRepository.findByMemberid(memberid);
@@ -68,10 +72,15 @@ public class MemberService {
         return memberRepository.findAll(pageable);
     }
 
-	public void memberDelete(MemberDeleteDto memberDeleteDto){
-		String memberid = memberDeleteDto.getMemberid();
-		List<MemberEntity> memberEntity = memberRepository.findByMemberid(memberid);
-		memberRepository.delete((MemberEntity) memberEntity);
+	public void memberDelete(String memberid){
+		MemberEntity memberEntity = memberRepository.findByMemberid(memberid);
+		MemberDeleteDto memberDeleteDto = new MemberDeleteDto(memberEntity);
+		MemberDeleteEntity memberDeleteEntity = MemberDeleteEntity.toSaveEntity(memberDeleteDto);
+		memberDeleteRepository.save(memberDeleteEntity);
+
+		memberRepository.deleteById(memberid);
+
+
 
 	}
 

@@ -15,21 +15,21 @@ import java.sql.Timestamp;
 @Data
 public class MemberDeleteEntity {
     @Id
-    @Column(name = "member_id", nullable = false)
+    @Column(name = "member_id")
     private String memberid;
 
 
-    @Column(name = "member_name", nullable = false)
+    @Column(name = "member_name")
     private String membername;
 
-    @Column(name = "member_tel", nullable = false)
+    @Column(name = "member_tel")
     private String membertel;
 
-    @Column(name = "member_mail", nullable = false)
+    @Column(name = "member_mail")
     private String membermail;
 
-    @Column(name = "member_delete", nullable = false)
-    private Timestamp memberdelete;
+    @Column(name = "member_deleted")
+    private Timestamp memberdeleted;
 
 
     public static MemberDeleteEntity toSaveEntity(MemberDeleteDto memberDeleteDto) {
@@ -38,7 +38,7 @@ public class MemberDeleteEntity {
         memberDeleteEntity.setMembermail(memberDeleteDto.getMembermail());
         memberDeleteEntity.setMembername(memberDeleteDto.getMembername());
         memberDeleteEntity.setMembertel(memberDeleteDto.getMembertel());
-        memberDeleteEntity.setMemberdelete(memberDeleteDto.getMemberdelete());
+        memberDeleteEntity.setMemberdeleted(memberDeleteDto.getMemberdeleted());
 
         return memberDeleteEntity;
 

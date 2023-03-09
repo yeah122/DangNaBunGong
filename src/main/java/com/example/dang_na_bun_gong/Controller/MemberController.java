@@ -1,7 +1,10 @@
 package com.example.dang_na_bun_gong.Controller;
 
+import com.example.dang_na_bun_gong.DTO.MemberDeleteDto;
 import com.example.dang_na_bun_gong.DTO.MemberJoinDto;
 import com.example.dang_na_bun_gong.DTO.MemberLoginDto;
+import com.example.dang_na_bun_gong.Entity.MemberDeleteEntity;
+import com.example.dang_na_bun_gong.Service.MemberDeleteService;
 import com.example.dang_na_bun_gong.Vo.ResultVo;
 import com.example.dang_na_bun_gong.Entity.MemberEntity;
 import com.example.dang_na_bun_gong.Repository.MemberRepository;
@@ -30,10 +33,10 @@ import java.util.regex.Pattern;
 @Controller
 public class MemberController {
 
-	private final MemberRepository memberRepository = null;
 
 	@Autowired
 	private MemberService memberService;
+	private MemberDeleteService memberDeleteService;
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -196,7 +199,7 @@ public class MemberController {
     public String mypage(Model model, HttpSession session) {
 
 		if(session.getAttribute("memberid") != null) {
-			List<MemberEntity> memberInfo = null;
+			MemberEntity memberInfo = null;
 
 			memberInfo = memberService.memberInfo(session.getAttribute("memberid").toString());
 			model.addAttribute("memberInfo", memberInfo);
@@ -219,12 +222,20 @@ public class MemberController {
 	}
 
 	@DeleteMapping("/memberDelete")
-	public @ResponseBody ResultVo meberdelete(HttpSession session){
-		List<MemberEntity> member = null;
-		 member = memberService.memberInfo(session.getAttribute("memberid").toString());
-
-		memberService.memberDelete(member);
-
+	public @ResponseBody ResultVo meberdelete(HttpSession session) {
+		String memberId = session.getAttribute("memberid").toString();
+		if (memberId == null)
+		{
+			System.out.println("로그인 안함");
+			return new ResultVo(666, "false", "로그인 안함", null);
+		}
+		System.out.println("세션아이디" + memberId);
+		memberService.memberDelete(memberId);
+		boolean memberIdcheck = memberService.memberIDcheck(memberId);
+		if (memberIdcheck) {
+			return new ResultVo(999, "false", "삭제실패", null);
+		}
+		return new ResultVo(0, "true", "삭제성공", null);
 	}
 	// 회원정보 수정
 	/*@GetMapping("/member/modify") // localhost:8080/board/view?id=1

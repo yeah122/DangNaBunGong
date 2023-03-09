@@ -26,6 +26,6 @@ public interface MemberRepository extends JpaRepository<MemberEntity, String> {
     List<MemberEntity> searchParamRepo(@Param("name") String name);
 
 
-	List<MemberEntity> findByMemberid(String memberid);
+	MemberEntity findByMemberid(String memberid);
 
 }
