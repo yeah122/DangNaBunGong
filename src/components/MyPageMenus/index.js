@@ -11,6 +11,9 @@ function MyPageMenus() {
     const goSellProduct= () => {
         navigate('/SellProduct')
     }
+    const goRewriteMyProfile= () => {
+        navigate('/RewriteMyProfile')
+    }
 
     return(
         <MyPageMenu>
@@ -18,7 +21,7 @@ function MyPageMenus() {
             <MyPageMenuText>구매 내역</MyPageMenuText>
             <MyPageMenuText>찜 목록</MyPageMenuText>
             <MyPageMenuText>거래후기</MyPageMenuText>
-            <MyPageMenuText>내 정보</MyPageMenuText>
+            <MyPageMenuText onClick={goRewriteMyProfile}>내 정보</MyPageMenuText>
             <MyPageMenuText>고객센터</MyPageMenuText>
             <MyPageMenuText onClick={goDeleteAccount}>회원탈퇴</MyPageMenuText>
         </MyPageMenu>

@@ -10,6 +10,8 @@ import ChangePw from "../page/ChangePw";
 import DeleteAccount from "../page/DeleteAccount";
 import SellProduct from "../page/SellProduct";
 import RewriteMyProfile from "../page/RewriteMyProfile";
+import Chat from "../page/Chat";
+import SomeonePage from "../page/SomeonePage";
 
 
 function RootRoute() {
@@ -27,6 +29,8 @@ function RootRoute() {
             <Route path="/DeleteAccount" element={<DeleteAccount />}/>
             <Route path="/SellProduct" element={<SellProduct />}/>
             <Route path="/RewriteMyProfile" element={<RewriteMyProfile />}/>
+            <Route path="/Chat" element={<Chat />}/>
+            <Route path="/SomeonePage" element={<SomeonePage />}/>
         </Routes>
         </BrowserRouter>
     )
