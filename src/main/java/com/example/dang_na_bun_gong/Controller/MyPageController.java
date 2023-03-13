@@ -29,7 +29,7 @@ public class MyPageController {
     @GetMapping("/myPage")
     public @ResponseBody ResultVo myPage(HttpSession httpSession){
 
-        String memberid = httpSession.getAttribute("memberid").toString();; // 세션에서 memberid 가져오기
+        String memberid = httpSession.getAttribute("memberid").toString(); // 세션에서 memberid 가져오기
 
         List<ArticleDto> myPageSell = myPageService.myPage_sellList(memberid);
         List<ArticleDto> myPageBuy = myPageService.myPage_buyList(memberid);

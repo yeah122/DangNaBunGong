@@ -183,16 +183,22 @@ public class MemberController {
 	// 회원정보 수정
 	@GetMapping("/memberUpdate")
 	public @ResponseBody ResultVo memberUpdate(HttpSession httpSession){
-		String memberid = httpSession.getAttribute("memberid").toString();;
+		String memberid = httpSession.getAttribute("memberid").toString();
 		if(memberid == null){
 			return new ResultVo(101, "false", "비로그인상태");
 		}else{
 		List<MemberEntity> findEntity = memberService.getMemberInfo(memberid);
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("memberinfo", findEntity);
-		return new ResultVo(0, "true", "출력", jsonObject.toString());
+		return new ResultVo(0, "true", "success", jsonObject.toString());
 		}
 	}
+
+	//회원정보 저장하기
+	@PostMapping("memberUpdateDo"
+	public @ResponseBody ResultVo memberUpdateDo(){
+
+			}
 
 	/*@PostMapping("/memberUpdateDo")
 	public @ResponseBody ResultVo memberUpdateDo(HttpSession httpSession, MemberUpdateEntity memberUpdateEntity) {
