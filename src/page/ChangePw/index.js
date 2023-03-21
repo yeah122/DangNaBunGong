@@ -40,7 +40,7 @@ function ChangePw() {
         }
         else if (response.data.stateCode == 0) {
             alert ('비밀번호가 변경되었습니다.')
-            navigate ('/로그인')
+            navigate ('/Login')
         }
     }catch(error){}
 }

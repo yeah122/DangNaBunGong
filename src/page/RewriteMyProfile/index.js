@@ -1,9 +1,76 @@
 import styled from "styled-components";
 import MainHeader from "../../components/MainHeader";
 import MyPageMenus from "../../components/MyPageMenus";
-import MyProfile from "../../components/MyPageProfile"
+import MyProfile from "../../components/MyPageProfile";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function RewriteMyProfile() {
+
+    const navigate = useNavigate();
+
+    const goChangePw =()=> {
+        navigate('/ChangePw')
+    }
+
+    const [Id, setId] = useState(" ");
+    const [Name, setName] = useState(" ");
+    const [NickName, setNickName] = useState(" ");
+    const [Tel, setTel] = useState(" ");
+    const [Mail, setMail] = useState(" ");
+    const [Region, setRegion] = useState(" ");
+    const [Intro, setIntro] = useState(" ");
+    const [Photo, setPhoto] = useState(" ");
+    const [Time, setTime] = useState(" ");
+
+    const onNickNameHandler = (event) => {
+        setNickName(event.currentTarget.value);
+    };
+    const onIdHandler = (event) => {
+        setId(event.currentTarget.value);
+    };
+    const onNameHandler = (event) => {
+        setName(event.currentTarget.value);
+    };
+    const onTelHandler = (event) => {
+        setTel(event.currentTarget.value);
+    };
+    const onMailHandler = (event) => {
+        setMail(event.currentTarget.value);
+    };
+    const onRegionHandler = (event) => {
+        setRegion(event.currentTarget.value);
+    };
+    const onIntroHandler = (event) => {
+        setIntro(event.currentTarget.value);
+    };
+    const onPhotoHandler = (event) => {
+        setPhoto(event.currentTarget.value);
+    };
+
+    async function PatchData () {
+        try{
+            const response = await axios.patch("",{
+                memberid:Id,
+                 membername:Name,
+                 membertel:Tel,
+                 memberemail:Mail,
+                 memberregion : Region,
+                 membernickname : NickName,
+                 memberintro : Intro,
+                 memberphotofp : Photo,
+                 memberchanged : Time
+            });
+            if(response.data.stateCode == 0){
+                alert('정상적으로 수정되었습니다.')
+                navigate('/MyPage')
+            }
+            else if(response.data.stateCode == 190){
+                alert('변경에 실패하였습니다.')
+            }
+        }catch(error){}
+    }
     return(
         <RewritePage>
             <MainHeader></MainHeader>
@@ -19,41 +86,41 @@ function RewriteMyProfile() {
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>비밀번호</RewriteSectionTitle>
-                            <RewriteInput type='password' placeholder="영문, 숫자, 특수문자 조합 최소 8자" />
+                            <RewritePw onClick={goChangePw}>변경하기</RewritePw>
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>닉네임</RewriteSectionTitle>
-                            <RewriteInput type='text' placeholder="닉네임"/>
+                            <RewriteInput onChange={onNickNameHandler} type='text' placeholder="닉네임"/>
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>이름</RewriteSectionTitle>
-                            <RewriteInput type='text' placeholder="이름" />
+                            <RewriteInput onChange={onNameHandler} type='text' placeholder="이름" />
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>소개글</RewriteSectionTitle>
-                            <RewriteTextarea type='text' placeholder="소개글" />
+                            <RewriteTextarea onChange={onIntroHandler} type='text' placeholder="소개글" />
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>이메일</RewriteSectionTitle>
-                            <RewriteInput type='email' placeholder="이메일" />
+                            <RewriteInput onChange={onMailHandler} type='email' placeholder="이메일" />
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>휴대전화</RewriteSectionTitle>
-                            <RewriteInput type='tel' placeholder="전화번호" />
+                            <RewriteInput onChange={onTelHandler} type='tel' placeholder="전화번호" />
                         </RewriteSection>
                         <RewriteSection>
                             <RewriteSectionTitle>거주지역</RewriteSectionTitle>
                             <RewriteRegion>
-                                <option>시/도</option>
+                                <option onChange={onRegionHandler}>시/도</option>
                             </RewriteRegion>
                             <RewriteRegion>
-                                <option>시/구</option>
+                                <option onChange={onRegionHandler}>시/구</option>
                             </RewriteRegion>
                         </RewriteSection>
                         <RewriteImgSection>
                             <RewriteSectionTitle>사진</RewriteSectionTitle>
                             <RewriteImgArea>
-                                <RewriteImgInput type="" />
+                                <RewriteImgInput onChange={onPhotoHandler} type="" />
                                 <RewriteImgTextArea>
                                     <RewriteImgText>회원님을 소개할 수 있는 사진을 등록해 주세요.</RewriteImgText>
                                     <RewriteImgText>등록된 사진은 게시물이나 채팅에 사용됩니다.</RewriteImgText>
@@ -70,7 +137,7 @@ function RewriteMyProfile() {
                             <RewriteId>성별</RewriteId>
                         </RewriteSection>
                         <RewriteBtnSection>
-                            <RewriteBtn>변경하기</RewriteBtn>
+                            <RewriteBtn onClick={PatchData}>변경하기</RewriteBtn>
                             <RewriteCancle>취소</RewriteCancle>
                         </RewriteBtnSection>
                     </RewirteContent>
@@ -125,6 +192,14 @@ const RewriteInput = styled.input`
 width: 20rem;
 height: 1.5rem;
 padding: 0rem 0.5rem;`
+
+const RewritePw = styled.button`
+width: 5rem;
+height: 1.8rem;
+border: 1px solid rgb(189,189,189);
+border-radius: 5px;
+font-size: 0.84rem;
+background-color: white;`
 
 const RewriteTextarea = styled.textarea`
 min-width: 20rem;

@@ -2,8 +2,34 @@ import styled from "styled-components";
 import MainHeader from "../../components/MainHeader";
 import MyPageMenus from "../../components/MyPageMenus";
 import MyProfile from "../../components/MyPageProfile";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function DeleteAccount() {
+
+    const navigate = useNavigate();
+
+    const goMyPage = () => {
+        navigate('/MyPage')
+    }
+
+    async function DeleteData () {
+        try{
+            const response = await axios.delete("",{
+            });
+            if(response.data.stateCode == 0){
+                alert('정상적으로 탈퇴되었습니다.')
+                navigate('/')
+            }
+            else if(response.data.stateCode == 209){
+                alert('로그인 되어있지 않습니다.')
+            }
+            else if(response.data.stateCode == 210){
+                alert('탈퇴에 실패하였습니다. 다시 시도해 주시기 바랍니다.')
+            }
+        }catch(error){}
+    }
+
     return(
         <DeleteAccountPage>
             <MainHeader />
@@ -24,8 +50,8 @@ function DeleteAccount() {
                             </DeleteWrite>
                         </DeleteWriteSection>
                         <DeleteBtnSection>
-                            <DeleteBtn>탈퇴</DeleteBtn>
-                            <DeleteCancle>취소</DeleteCancle>
+                            <DeleteBtn onClick={DeleteData}>탈퇴</DeleteBtn>
+                            <DeleteCancle onClick={goMyPage}>취소</DeleteCancle>
                         </DeleteBtnSection>
                     </DeleteSection>
                 </DeleteAccountMain>

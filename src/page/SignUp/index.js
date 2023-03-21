@@ -76,7 +76,7 @@ function SignUp() {
                  memberregion : Region
              });
              if(response.data.stateCode == 0) {
-                 navigate("/로그인")
+                 navigate("/Login")
                  alert("가입이 완료되었습니다.")
              }
              else if(response.data.stateCode == 300 ) {

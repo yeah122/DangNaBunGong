@@ -17,8 +17,8 @@ function MainHeader() {
     const goChat =() => {
         navigate('/Chat')
     }
-    const goFoundId =() => {
-        navigate('/FoundId')
+    const goLogin =() => {
+        navigate('/Login')
     }
     const goMyPage =() => {
         navigate('/MyPage')
@@ -28,7 +28,7 @@ function MainHeader() {
         <Headers>
             <Header>
                 <LoginSection>
-                    <LoginText onClick={goFoundId}>로그인</LoginText>
+                    <LoginText onClick={goLogin}>로그인</LoginText>
                     <LoginText> / </LoginText>
                     <LoginText onClick={goSignUp}>회원가입</LoginText>
                 </LoginSection>

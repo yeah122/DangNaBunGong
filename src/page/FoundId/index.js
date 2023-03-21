@@ -14,6 +14,9 @@ function FoundId() {
     const goSignUp = () => {
         navigate('/SignUp');
     }
+    const goLogin = () => {
+        navigate('/Login');
+    }
 
     const [Name, setName] = useState(" ");
     const [Tel, setTel] = useState(" ");
@@ -33,7 +36,7 @@ function FoundId() {
                 membertel:Tel,
             });
             if(response.data.stateCode == 0) {
-                navigate("/")
+                navigate("/Login")
                 localStorage.setItem('Id', response.data.data);
                 alert("아이디 찾기에 성공했습니다. 아이디는 localStorage.getItem('Id')입니다.")
             }
@@ -67,7 +70,7 @@ function FoundId() {
                     <FoundIdBtn onClick={foundIdData}>아이디 찾기</FoundIdBtn>
                 </FoundIdBtnSection>
                 <FoundIdOptionSection>
-                    <FoundIdOption>로그인</FoundIdOption>
+                    <FoundIdOption onClick={goLogin}>로그인</FoundIdOption>
                     <FoundIdOption onClick={goFoundPw}>비밀번호 찾기</FoundIdOption>
                     <FoundIdOption onClick={goSignUp}>회원가입</FoundIdOption>
                 </FoundIdOptionSection>

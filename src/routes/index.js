@@ -12,6 +12,7 @@ import SellProduct from "../page/SellProduct";
 import RewriteMyProfile from "../page/RewriteMyProfile";
 import Chat from "../page/Chat";
 import SomeonePage from "../page/SomeonePage";
+import Login from "../page/Login";
 
 
 function RootRoute() {
@@ -31,6 +32,7 @@ function RootRoute() {
             <Route path="/RewriteMyProfile" element={<RewriteMyProfile />}/>
             <Route path="/Chat" element={<Chat />}/>
             <Route path="/SomeonePage" element={<SomeonePage />}/>
+            <Route path="/Login" element={<Login />}/>
         </Routes>
         </BrowserRouter>
     )
