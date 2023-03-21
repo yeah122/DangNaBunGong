@@ -171,17 +171,20 @@ public class MemberController {
 
 	//카카오 소셜로그인
 	@RequestMapping("/kakaoLogin")
-	public String home(@RequestParam(value = "code", required = false) String code) throws Exception {
-		System.out.println("code = " + code);
-		String access_Token = memberService.getAccessToken(code);
-		System.out.println("access_Token : " + access_Token);
+	// https://kauth.kakao.com/oauth/authorize?client_id=0aab8850b0f1de3b11837d1e5e945b8b&redirect_uri=http://localhost:8080/kakaoLogin&response_type=code 입력해야함.
+	public @ResponseBody ResultVo kakaoLogin(@RequestParam(value = "code", required = false) String access_Token) {
+		//String access_Token = memberService.getAccessToken(code); access 토큰은 프론트에서 넘겨줌
 		HashMap<String, Object> userInfo = memberService.getUserInfo(access_Token);
-		System.out.println("email : " + userInfo.get("member_mail"));
-		System.out.println("name : " + userInfo.get("member_name"));
-		System.out.println("gender : " + userInfo.get("member_gender"));
-		System.out.println("birth : " + userInfo.get("member_birth"));
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("kakaoLoginInfo", userInfo.toString());
 
-		return "home";
+		Object member_nickname = userInfo.get("member_nickname"); //카카오에서 넘어온 회원정보가 userInfo에 저장되어있는지 확인
+
+		if(member_nickname == null){
+			return new ResultVo(109, "false", "서버오류");
+		}else {
+			return new ResultVo(0, "ture", "카카오 정보 출력 성공", jsonObject.toString());
+		}
 	}
 
 	// 회원 리스트 처리
@@ -213,7 +216,7 @@ public class MemberController {
 	}
 
 	//회원정보 저장하기
-	@PostMapping("memberUpdateDo")
+	@PatchMapping("memberUpdateDo")
 	public @ResponseBody ResultVo memberUpdateDo(HttpSession httpSession, MemberEntity memberEntity){
 			String memberid = httpSession.getAttribute("memberid").toString();
 			List<MemberEntity> findEntity = memberService.getMemberInfo(memberid);
