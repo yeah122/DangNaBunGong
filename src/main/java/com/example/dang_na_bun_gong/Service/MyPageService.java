@@ -20,13 +20,9 @@ public class MyPageService {
     public List<ArticleDto> myPage_sellList(String memberid){
         return myPageRepository.sellList(memberid);
     }
-    public List<ArticleDto> myPage_sellListAll(String memberid) {return myPageRepository.sellListAll(memberid);}
 
     public List<ArticleDto> myPage_buyList(String memberid){
         return myPageRepository.buyList(memberid);
-    }
-    public List<ArticleDto> myPage_buyListAll(String memberid){
-        return myPageRepository.buyListAll(memberid);
     }
 
     public List<MemberDto> myPage_memberInfo(String memberid){
@@ -36,9 +32,12 @@ public class MyPageService {
     public List<ArticleDto> myPage_likeList(String memberid){
         return myPageRepository.likeList(memberid);
     }
-    public List<ArticleDto> myPage_likeListAll(String memberid){
-        return myPageRepository.likeListAll(memberid);
+
+    public List<ArticleDto> myPage_reviewCount(String memberid, String review){
+        return myPageRepository.reviewCount(memberid, review);
     }
 
-
+    public String opponentPage_memberid(String articleId){
+        return myPageRepository.getmemberid(articleId);
+    }
 }
