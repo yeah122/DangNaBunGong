@@ -11,4 +11,6 @@ public interface ArticleDto {
     String getSell_member_id();
     String getBuy_member_id();
     String getMember_id();
+    String getReview_key();
+    Long getCount();
 }

@@ -6,6 +6,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+import com.example.dang_na_bun_gong.DTO.MemberDeleteDto;
+import com.example.dang_na_bun_gong.Entity.MemberDeleteEntity;
+import com.example.dang_na_bun_gong.Repository.MemberDeleteRepository;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -23,6 +26,8 @@ public class MemberService {
 
 	@Autowired
 	private MemberRepository memberRepository;
+	@Autowired
+	private MemberDeleteRepository memberDeleteRepository;
 	
 	//아이디 확인
 	public boolean memberIDcheck(String memberid) {
@@ -45,7 +50,8 @@ public class MemberService {
 		 
 		return memberRepository.loginCheck(memberid, memberpw);
 	}
-	
+
+
 	//회원 정보 가져오기
     public List<MemberEntity> getMemberInfo(String memberid) {
         return memberRepository.findByMemberid(memberid);
@@ -71,6 +77,18 @@ public class MemberService {
 
         return memberRepository.findAll(pageable);
     }
+
+	public void memberDelete(String memberid){
+		List<MemberEntity> memberEntity = memberRepository.findByMemberid(memberid);
+		MemberDeleteDto memberDeleteDto = new MemberDeleteDto((MemberEntity) memberEntity);
+		MemberDeleteEntity memberDeleteEntity = MemberDeleteEntity.toSaveEntity(memberDeleteDto);
+		memberDeleteRepository.save(memberDeleteEntity);
+
+		memberRepository.deleteById(memberid);
+
+
+
+	}
 
 	//소셜로그인 토큰 받아오기
 	/* 프론트에서 해주는건데 내가 구현한거래... 나 이걸로 일주일을 하루에 7,8시간씩 머리싸맸는데...

@@ -27,7 +27,8 @@ dependencies {
 	implementation 'org.json:json:20200518'
     implementation 'org.modelmapper:modelmapper:3.1.1'
 	implementation( 'com.google.code.gson:gson:2.10.1' )
-	implementation 'com.google.code.gson:gson-parent:2.10.1'// json
+	implementation 'com.google.code.gson:gson-parent:2.10.1'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'// json
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	//runtimeOnly 'mysql:mysql-connector-java'

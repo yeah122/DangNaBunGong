@@ -9,6 +9,7 @@ import com.example.dang_na_bun_gong.Repository.MyPageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -33,8 +34,8 @@ public class MyPageService {
         return myPageRepository.likeList(memberid);
     }
 
-    public List<ArticleDto> myPage_reviewCount(String memberid, String review){
-        return myPageRepository.reviewCount(memberid, review);
+    public List<ArticleDto> myPage_reviewCount(String memberid, String review_key){
+        return myPageRepository.reviewCount(memberid, review_key);
     }
 
     public String opponentPage_memberid(String articleId){
