@@ -10,6 +10,10 @@ import java.util.UUID;
 import com.example.dang_na_bun_gong.DTO.ArticleDto;
 import com.example.dang_na_bun_gong.DTO.ArticleWriteDto;
 import com.example.dang_na_bun_gong.Entity.ArticleEntity;
+import com.example.dang_na_bun_gong.Entity.CategoryEntity;
+import com.example.dang_na_bun_gong.Entity.RegionEntity;
+import com.example.dang_na_bun_gong.Repository.ProductCategoryRepository;
+import com.example.dang_na_bun_gong.Repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,19 +27,39 @@ public class ArticleService {
 	
 	@Autowired
 	private ArticleRepository articleRepository;
+    @Autowired
+    private ProductCategoryRepository productCategoryRepository;
+    @Autowired
+    private RegionRepository regionRepository;
 
 
     //main페이지
     public List<ArticleDto> mainPage_current(){
         return articleRepository.currentArticle();
     }
-
     public List<ArticleDto> mainPage_popular(){
         return articleRepository.popularArticle();
     }
+    public List<CategoryEntity> mainPage_product_category(){ // 상품 카테고리
+        return productCategoryRepository.findAll();
+    }
+    public List<RegionEntity> mainPage_region(){ // 상품 카테고리
+        return regionRepository.findAll();
+    }
 
-    public Page<ArticleEntity> articleListAll(Pageable pageable, Integer regionid){
-        return articleRepository.articleList(pageable, regionid);
+
+    // 게시글 리스트(article list)
+    public Page<ArticleDto> articleListAllNoLogin(Pageable pageable){
+        return articleRepository.articleListAllNoLogin(pageable);
+    }
+    public Page<ArticleDto> articleListNoLogin(Pageable pageable, Integer pcategoryid){
+        return articleRepository.articleListNoLogin(pageable, pcategoryid);
+    }
+    public Page<ArticleDto> articleListAll(Pageable pageable, Integer regionid){
+        return articleRepository.articleListAll(pageable, regionid);
+    }
+    public Page<ArticleDto> articleList(Pageable pageable, Integer regionid, Integer pcategoryid){
+        return articleRepository.articleList(pageable, regionid, pcategoryid);
     }
 
     public void write(ArticleWriteDto article, List<MultipartFile> file) throws IOException {

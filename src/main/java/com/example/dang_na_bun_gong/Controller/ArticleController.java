@@ -1,9 +1,12 @@
 package com.example.dang_na_bun_gong.Controller;
 
 import com.example.dang_na_bun_gong.DTO.ArticleDto;
+import com.example.dang_na_bun_gong.DTO.ArticleListDto;
 import com.example.dang_na_bun_gong.DTO.ArticleWriteDto;
 import com.example.dang_na_bun_gong.DTO.MainDto;
 import com.example.dang_na_bun_gong.Entity.ArticleEntity;
+import com.example.dang_na_bun_gong.Entity.CategoryEntity;
+import com.example.dang_na_bun_gong.Entity.RegionEntity;
 import com.example.dang_na_bun_gong.Service.ArticleService;
 import com.example.dang_na_bun_gong.Service.BookMarkSerivce;
 import com.example.dang_na_bun_gong.Vo.ResultVo;
@@ -37,6 +40,9 @@ public class ArticleController {
     public @ResponseBody ResultVo main(){
         List<ArticleDto> mainCurrent = articleService.mainPage_current();
         List<ArticleDto> mainPopular = articleService.mainPage_popular();
+        List<CategoryEntity> mainCategory = articleService.mainPage_product_category();
+        List<RegionEntity> mainRegion = articleService.mainPage_region();
+
 
         JSONObject jsonObject = new JSONObject();
         List<MainDto> mainDto = new ArrayList<>();
@@ -55,20 +61,153 @@ public class ArticleController {
         jsonObject.put("popular", mainDto);
         mainDto.clear();
 
+        jsonObject.put("productCategory", mainCategory);
+        jsonObject.put("region", mainRegion);
+
+
         return new ResultVo(0, "true", "불러오기 성공", jsonObject.toString());
     }
 
-    //게시물 리스트 보기 (실패)
-    @GetMapping("/articleList")
-    public @ResponseBody ResultVo articleList(
-            @PageableDefault(page = 0, size = 5) Pageable pageable, HttpSession httpSession) {
+    //게시물 리스트 보기(비로그인상태)                     //로그인 상태의 게시물 리스트와 지역코드만 제외
+    @GetMapping("/articleListNoLogin")  //:8080/articleListNoLogin?page=(숫자)
+    public @ResponseBody ResultVo articleListNoLogin(
+            @PageableDefault(size = 5) Pageable pageable, HttpSession httpSession) {
 
-        Integer regionid = 23080;
-        Page<ArticleEntity> articlelist = articleService.articleListAll(pageable, regionid);
+        Integer pcategoryid = null; //test id = 64
+        //pcategoryid = (Integer) httpSession.getAttribute("pcategoryid");
+
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ArticleList", articlelist.toString());
+        List<ArticleListDto> articleListDto = new ArrayList<>();
 
-        return new ResultVo(0, "ture", "이게 안돼?", jsonObject.toString());
+        //카테고리가 선택되지 않았을 때 (전체 출력)
+        if (pcategoryid == null) {
+            Page<ArticleDto> articlelistAllNoLogin = articleService.articleListAllNoLogin(pageable);
+            Integer lastPageCnt = Math.toIntExact(articlelistAllNoLogin.getTotalElements() - pageable.getOffset()); //마지막 페이지 index overflow 일으키지 않기 위해 따로 계산
+
+            if (pageable.getPageNumber() + 1 > articlelistAllNoLogin.getTotalPages()) {
+                return new ResultVo(309, "false", "마지막 페이지를 초과하였습니다.");
+            } else {
+                if (pageable.getPageNumber() == (articlelistAllNoLogin.getTotalPages() - 1)) {
+                    for (int i = 0; i < lastPageCnt; i++) {
+                        ArticleListDto data = new ArticleListDto(articlelistAllNoLogin.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                } else {
+                    for (int i = 0; i < articlelistAllNoLogin.getSize(); i++) {
+                        ArticleListDto data = new ArticleListDto(articlelistAllNoLogin.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                }
+
+                jsonObject.put("nowPage", pageable.getPageNumber() + 1);   //이건 0부터 시작해서 +1 해줌
+                jsonObject.put("endPage", articlelistAllNoLogin.getTotalPages());  //이건 1부터 시작
+                jsonObject.put("ArticleList", articleListDto);
+                articleListDto.clear();
+
+                return new ResultVo(0, "ture", "전체 출력(비로그인입니다.)", jsonObject.toString());
+            }
+        }
+        //카테고리가 선택되었을 때
+        else {
+            Page<ArticleDto> articleListNoLogin = articleService.articleListNoLogin(pageable, pcategoryid);
+            Integer lastPageCnt = Math.toIntExact(articleListNoLogin.getTotalElements() - pageable.getOffset());  //마지막 페이지 index overflow 일으키지 않기 위해 따로 계산
+
+            if (pageable.getPageNumber() + 1 > articleListNoLogin.getTotalPages()) {
+                return new ResultVo(309, "false", "마지막 페이지를 초과하였습니다.");
+            } else {
+                if (pageable.getPageNumber() == (articleListNoLogin.getTotalPages() - 1)) {
+                    for (int i = 0; i < lastPageCnt; i++) {
+                        ArticleListDto data = new ArticleListDto(articleListNoLogin.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                } else {
+
+                    for (int i = 0; i < articleListNoLogin.getSize(); i++) {
+                        ArticleListDto data = new ArticleListDto(articleListNoLogin.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                }
+
+                jsonObject.put("nowPage", pageable.getPageNumber() + 1);  //이건 0부터 시작해서 +1 해줌
+                jsonObject.put("endPage", articleListNoLogin.getTotalPages());   //이건 1부터 시작
+                jsonObject.put("ArticleList", articleListDto);
+                articleListDto.clear();
+
+                return new ResultVo(1, "ture", "해당 카테고리 출력(비로그인입니다.)", jsonObject.toString());
+            }
+        }
+    }
+
+    //게시물 리스트 보기(로그인상태)
+    @GetMapping("/articleList")  //:8080/articleList?page=(숫자)
+    public @ResponseBody ResultVo articleList(
+            @PageableDefault(size = 5) Pageable pageable, HttpSession httpSession) {
+
+        Integer regionid = null;
+        //regionid = (Integer) httpSession.getAttribute("regionid");  // test id = 23080
+        Integer pcategoryid = null; //test id = 64
+        //pcategoryid = (Integer) httpSession.getAttribute("pcategoryid");
+
+        JSONObject jsonObject = new JSONObject();
+        List<ArticleListDto> articleListDto = new ArrayList<>();
+
+        //카테고리가 선택되지 않았을 때 (전체 출력)
+        if (pcategoryid == null) {
+            Page<ArticleDto> articlelistAll = articleService.articleListAll(pageable, regionid);
+            Integer lastPageCnt = Math.toIntExact(articlelistAll.getTotalElements() - pageable.getOffset()); //마지막 페이지 index overflow 일으키지 않기 위해 따로 계산
+
+            if (pageable.getPageNumber() + 1 > articlelistAll.getTotalPages()) {
+                return new ResultVo(309, "false", "마지막 페이지를 초과하였습니다.");
+            } else {
+                if (pageable.getPageNumber() == (articlelistAll.getTotalPages() - 1)) {
+                    for (int i = 0; i < lastPageCnt; i++) {
+                        ArticleListDto data = new ArticleListDto(articlelistAll.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                } else {
+                    for (int i = 0; i < articlelistAll.getSize(); i++) {
+                        ArticleListDto data = new ArticleListDto(articlelistAll.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                }
+
+                jsonObject.put("nowPage", pageable.getPageNumber() + 1);   //이건 0부터 시작해서 +1 해줌
+                jsonObject.put("endPage", articlelistAll.getTotalPages());  //이건 1부터 시작
+                jsonObject.put("ArticleList", articleListDto);
+                articleListDto.clear();
+
+                return new ResultVo(0, "ture", "전체 출력", jsonObject.toString());
+            }
+        }
+            //카테고리가 선택되었을 때
+        else {
+            Page<ArticleDto> articleList = articleService.articleList(pageable, regionid, pcategoryid);
+            Integer lastPageCnt = Math.toIntExact(articleList.getTotalElements() - pageable.getOffset());  //마지막 페이지 index overflow 일으키지 않기 위해 따로 계산
+
+            if (pageable.getPageNumber() + 1 > articleList.getTotalPages()) {
+                return new ResultVo(309, "false", "마지막 페이지를 초과하였습니다.");
+            } else {
+                if (pageable.getPageNumber() == (articleList.getTotalPages() - 1)) {
+                    for (int i = 0; i < lastPageCnt; i++) {
+                        ArticleListDto data = new ArticleListDto(articleList.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                } else {
+
+                    for (int i = 0; i < articleList.getSize(); i++) {
+                        ArticleListDto data = new ArticleListDto(articleList.getContent().get(i));
+                        articleListDto.add(data);
+                    }
+                }
+
+                jsonObject.put("nowPage", pageable.getPageNumber() + 1);  //이건 0부터 시작해서 +1 해줌
+                jsonObject.put("endPage", articleList.getTotalPages());   //이건 1부터 시작
+                jsonObject.put("ArticleList", articleListDto);
+                articleListDto.clear();
+
+                return new ResultVo(1, "ture", "해당 카테고리 출력", jsonObject.toString());
+            }
+        }
     }
 
 @GetMapping("/articleWrite")
