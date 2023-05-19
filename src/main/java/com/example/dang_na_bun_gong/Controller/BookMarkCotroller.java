@@ -17,7 +17,7 @@ public class BookMarkCotroller {
     @Autowired
     private BookMarkSerivce bookMarkSerivce;
 
-
+//좋아요 수 증가
     @PostMapping("/addLike")
     public ResultVo addLike(@RequestBody BookMarkDto bookMarkDto, HttpSession session) {
         Integer article = (Integer)session.getAttribute("articleid");
@@ -30,6 +30,7 @@ public class BookMarkCotroller {
 
 
     }
+    //좋아요 수 감소
     @DeleteMapping("/deleteLike")
     public ResultVo deleteLike(@RequestBody BookMarkDto bookMarkDto,HttpSession session) {
         Integer article = (Integer)session.getAttribute("articleid");

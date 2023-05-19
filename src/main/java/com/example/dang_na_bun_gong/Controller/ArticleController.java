@@ -209,12 +209,13 @@ public class ArticleController {
             }
         }
     }
-
+//게시물 작성페이지로 이동
 @GetMapping("/articleWrite")
     public String article(){
 return "board";
     }
 
+    //게시물 작성 api
 @PostMapping("/articleWriteDo")
     public @ResponseBody ResultVo articleWritedo(ArticleWriteDto article, List<MultipartFile> file, HttpSession session) throws IOException {
     String userid = session.getAttribute("memberid").toString();
@@ -242,7 +243,8 @@ return "board";
     return new ResultVo(0, "true", "글쓰기 성공" ,null);
 }
 
-    @GetMapping("/articleView") // localhost:8080/article/View?id=1
+//게시물 상세보기
+    @GetMapping("/articleView") // 주소 예시 : localhost:8080/article/View?id=1
     public @ResponseBody ResultVo articleView(Model model, Integer id, HttpSession session) {
         int likecheck;
     model.addAttribute("article",articleService.articleview(id));
@@ -262,6 +264,7 @@ return "board";
 
         */
 
+        //좋아요 수 체크
             likecheck = bookMarkSerivce.Likecheck(id, memberId);
 
 

@@ -18,6 +18,7 @@ public class BookMarkSerivce {
     @Autowired
     private MemberRepository memberRepository;
 
+    //좋아요 수 증가
     public void addLike(BookMarkDto bookmarkDTO) {
         Integer articleId = bookmarkDTO.getArticleId();
         String memberId = bookmarkDTO.getMemberId();
@@ -32,6 +33,7 @@ public class BookMarkSerivce {
 
     }
 
+    //좋아요 한 내역 삭제
     public void deleteLike(BookMarkDto bookMarkDto) {
         Integer articleId = bookMarkDto.getArticleId();
         String memberId = bookMarkDto.getMemberId();
@@ -41,6 +43,8 @@ public class BookMarkSerivce {
         bookMarkRepository.delete(bookMark);
         articleRepository.decreaseLikeCnt(articleId);
     }
+
+    //게시물에 대한 회원의 좋아요 여부 체크
     public Integer Likecheck(Integer articleId,String memberId) {
 
 

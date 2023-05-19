@@ -62,12 +62,16 @@ public class ArticleService {
         return articleRepository.articleList(pageable, regionid, pcategoryid);
     }
 
+    //게시물 작성
     public void write(ArticleWriteDto article, List<MultipartFile> file) throws IOException {
 
+        //텍스트 파일 저장 주소 만들기
         String contentPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\text";
 
+        //사진 파일 저장 주소
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
+        //주소에 넣을 랜덤값 생성
         UUID uuid = UUID.randomUUID();
         UUID content = UUID.randomUUID();
 

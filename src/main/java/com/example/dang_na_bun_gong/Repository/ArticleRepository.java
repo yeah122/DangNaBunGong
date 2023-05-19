@@ -19,10 +19,13 @@ import java.util.List;
 public interface ArticleRepository extends JpaRepository<ArticleEntity, Integer>, JpaSpecificationExecutor<ArticleEntity> {
 	// 키워드 검색
 	// Page<BoardEntity> findByTitleContaining(String searchKeyword, Pageable pageable);
+
+	//좋아요 수 증가
 	@Modifying
 	@Query("UPDATE article p SET p.likecnt = p.likecnt + 1 WHERE p.articleid = :postId")
 	void increaseLikeCnt(@Param("postId") Integer postId);
 
+	//좋아요수 감소
 	@Modifying
 	@Query("UPDATE article p SET p.likecnt = p.likecnt - 1 WHERE p.articleid = :postId")
 	void decreaseLikeCnt(@Param("postId") Integer postId);
