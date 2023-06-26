@@ -1,0 +1,92 @@
+/* 디자인에 관한 코드 */
+.input {
+  width: 258px;
+  height: 67px;
+  background: #ffffff;
+  border: 1px solid #959595;
+  border-radius: 5px;
+  padding: 0px 20px;
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid #f21111;
+}
+
+.input:focus::placeholder {
+  color: #f21111;
+}
+
+.btn {
+  width: 298px;
+  height: 61px;
+  border-radius: 5px;
+  border: none;
+}
+
+.login {
+  font-weight: 600;
+  font-size: 22px;
+  color: #ffffff;
+  background: #f21111;
+}
+
+.social {
+  background: #ebff00;
+  font-weight: 600;
+  font-size: 20px;
+  color: #000000;
+}
+
+.search-info {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.search-info a {
+  text-decoration: none;
+  color: black;
+}
+
+.logo-text {
+  color: #f21111;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+/* 배치에 관한 코드 */
+.username {
+  position: absolute;
+  left: 571px;
+  top: 177px;
+}
+
+.password {
+  position: absolute;
+  left: 571px;
+  top: 257px;
+}
+
+.login {
+  position: absolute;
+  left: 571px;
+  top: 353px;
+}
+
+.search-info {
+  position: absolute;
+  left: 600px;
+  top: 443px;
+}
+
+.social {
+  position: absolute;
+  left: 571px;
+  top: 503px;
+}
+
+.logo {
+  position: absolute;
+  left: 601px;
+  top: 64px;
+}

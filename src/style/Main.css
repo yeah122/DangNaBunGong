@@ -1,0 +1,28 @@
+#body-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+/* 디자인과 관련된 코드 */
+.items a {
+  text-decoration: none;
+  color: black;
+}
+
+.item span:first-of-type{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.item span:not(:first-of-type){
+  font-size: 14px;
+}
+
+/* 배치와 관련된 코드 */
+.item {
+  display: inline-block;
+  margin: 10px 10px;
+}

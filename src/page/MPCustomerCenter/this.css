@@ -1,0 +1,49 @@
+/* tab menu */
+.tab-header{
+    list-style-type : none;
+}
+.tab-header a{
+    text-decoration: none;
+}
+.tab-header.active{
+    font-weight: bold;
+}
+
+.tab-item{
+    display: none;
+}
+.tab-item.active-target{
+    display: block;
+}
+
+/* tab-item */
+form > div{
+    margin-top: 10px;
+}
+
+/* 문의하기 작성 폼 */
+form > div > label {
+    display: inline-block;
+    vertical-align: top;
+    width: 4.5rem;
+}
+.form-item{
+    padding: 0.3rem 0.5rem;
+}
+#form-title{
+    min-width: 32rem;
+}
+textarea{
+    min-width: 32rem;
+    min-height: 20rem;
+    max-width: 32rem;
+    max-height: 20rem;
+}
+
+#form-btn{
+    margin-left: 4.5rem;
+    text-align: center;
+}
+
+form > div > button{
+}

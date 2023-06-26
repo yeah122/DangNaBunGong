@@ -1,0 +1,101 @@
+/* 메인페이지 섹션 구분 */
+.section {
+    margin: 10px;
+}
+
+/* 문의하기 작성 폼 */
+form > div > label {
+    display: inline-block;
+    vertical-align: top;
+    width: 4.5rem;
+}
+.form-item{
+    padding: 0.3rem 0.5rem;
+}
+#form-title{
+    min-width: 40rem;
+    max-width: 40rem;
+}
+#form-content{
+    min-width: 40rem;
+    min-height: 20rem;
+    max-width: 40rem;
+    max-height: 20rem;
+}
+
+#form-btn{
+    margin-left: 4.5rem;
+    text-align: center;
+}
+
+form > div > button{
+}
+
+/* border 속성 */
+.border-bottom{
+    border-bottom: 1px solid #bdbdbd;
+}
+
+/* div 속성 */
+.list-content-full{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+/* 질문 카테고리 박스 */
+.categoryBox-q {
+    overflow: hidden;
+    font-size: 1.05rem;
+    color: #3c3c3c;
+    padding: 0;
+    border: 2px solid #ededed;
+}
+
+.categoryBox-q li {
+    list-style-type : none;
+    position: relative;
+    float: left;
+    height: 3.0rem;
+    text-align: center;
+    box-sizing: border-box;
+    border-right: 2px solid #ededed;
+    line-height : 3.0rem;
+}
+
+.width-5{
+    width: 20%;
+}
+
+.width-6{
+    width: 16.66%;
+}
+
+.width-7{
+    width: 14.285%;
+}
+
+.width-8{
+    width: 12.5%;
+}
+
+.categoryBox-q li:last-child {
+    border-right: 0;
+}
+
+.categoryBox-q a {
+    display: inline-block;
+}
+
+.categoryBox-q li:hover {
+    display: inline-block;
+    background-color: #ededed;
+    font-weight: bold;
+}
+
+.categoryBox-q-lst {
+    text-decoration: none;
+    color: black;
+    list-style-type: none;
+}
