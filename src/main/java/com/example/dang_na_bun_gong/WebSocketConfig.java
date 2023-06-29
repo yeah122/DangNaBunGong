@@ -1,5 +1,6 @@
 package com.example.dang_na_bun_gong;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.WebSocketHandler;
@@ -7,18 +8,14 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
-    public WebSocketConfig() {
-    }
+    private final WebSocketHandler webSocketHandler;
 
+    @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(this.chatHandler(), new String[]{"/chat"});
-    }
-
-    @Bean
-    public WebSocketHandler chatHandler() {
-        return new MychatHandler();
+        registry.addHandler(webSocketHandler, "ws/chat").setAllowedOrigins("*");
     }
 }
