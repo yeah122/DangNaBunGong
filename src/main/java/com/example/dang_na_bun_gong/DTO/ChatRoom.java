@@ -1,8 +1,11 @@
 package com.example.dang_na_bun_gong.DTO;
 
+import com.example.dang_na_bun_gong.Service.ChatService;
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.web.socket.WebSocketSession;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter

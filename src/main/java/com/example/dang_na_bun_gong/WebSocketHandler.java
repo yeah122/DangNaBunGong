@@ -7,6 +7,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.example.dang_na_bun_gong.DTO.ChatMessage;
 import com.example.dang_na_bun_gong.DTO.ChatRoom;
+import com.example.dang_na_bun_gong.Service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
