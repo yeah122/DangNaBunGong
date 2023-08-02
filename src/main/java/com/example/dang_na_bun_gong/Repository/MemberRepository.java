@@ -19,14 +19,18 @@ public interface MemberRepository extends JpaRepository<MemberEntity, String> {
 	boolean existsByMembermail(String membermail);
 
 	Optional<MemberEntity> findByMemberidAndMemberpw(String memberid, String memberpw);
-	
+
 	@Query(value = "select count(member_id) from member where member_id = :memberid and member_pw = :memberpw", nativeQuery=true)
-    Integer loginCheck(@Param("memberid") String memberid, @Param("memberpw") String memberpw);
-	
-    @Query(value = "select name, age from member where name = :name", nativeQuery=true)
-    List<MemberEntity> searchParamRepo(@Param("name") String name);
+	Integer loginCheck(@Param("memberid") String memberid, @Param("memberpw") String memberpw);
+
+	@Query(value = "select name, age from member where name = :name", nativeQuery=true)
+	List<MemberEntity> searchParamRepo(@Param("name") String name);
 
 
 	List<MemberEntity> findByMemberid(String memberid);
+
+	//myPage 회원정보 간단 출력
+	@Query(value = "Select member_nickname, member_photo_fp, member_intro From member where member_id = :memberid", nativeQuery = true)
+	List<MemberDto> memberInfo(String memberid);
 
 }

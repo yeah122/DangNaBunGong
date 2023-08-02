@@ -63,20 +63,14 @@ public class MemberService {
 
 		return member.getMemberid();
 	}
-	
-	//회원수정
-	public void memberUpdate(List<MemberEntity> findEntity) {
-		memberRepository.saveAll(findEntity);
-	}
-	
-	//회원탈퇴
-	
-	// 게시글 리스트 처리
-    public Page<MemberEntity> boardList(Pageable pageable) {
-    	System.out.println("pageable: " + pageable);
 
-        return memberRepository.findAll(pageable);
-    }
+	//회원수정
+	public void memberUpdate(MemberEntity memberEntity) {
+		memberRepository.save(memberEntity);
+	}
+
+	//회원탈퇴
+
 
 	public void memberDelete(String memberid){
 		List<MemberEntity> memberEntity = memberRepository.findByMemberid(memberid);
